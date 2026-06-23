@@ -50,33 +50,20 @@ from urllib.parse import urlparse
 # compete — especially as a newer/growing SaaS product.
 # ──────────────────────────────────────────────────────────────────────────────
 
-# Tier 1 — Absolute giants. One of these in top 3 = very hard to beat.
-TIER_1_DOMAINS = {
-    # Global mega-authority
-    "forbes.com", "hubspot.com", "investopedia.com", "nerdwallet.com",
-    "businessinsider.com", "techcrunch.com", "zdnet.com",
-    # Indian GST/tax authority sites
-    "gst.gov.in", "incometax.gov.in", "cbic.gov.in",
-    # Big Indian finance/compliance media
-    "cleartax.in", "taxmanagementindia.com", "taxguru.in", "caclubindia.com",
-    # Dominant Indian billing software competitors with massive content teams
-    "tallysolutions.com", "zoho.com", "quickbooks.intuit.com",
-}
+def load_domain_blacklist() -> Tuple[set, set]:
+    """Loads the tier 1 and tier 2 domains from data/domain_blacklist.json."""
+    blacklist_path = os.path.join(_project_root, "data", "domain_blacklist.json")
+    try:
+        with open(blacklist_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            t1 = set(data.get("tier_1", []))
+            t2 = set(data.get("tier_2", []))
+            return t1, t2
+    except Exception as e:
+        print(f"⚠️  Could not load domain blacklist: {e}. Using empty lists.")
+        return set(), set()
 
-# Tier 2 — Strong competitors. Several in top 10 = difficult but not impossible.
-TIER_2_DOMAINS = {
-    # Indian business/finance media
-    "economictimes.indiatimes.com", "livemint.com", "moneycontrol.com",
-    "financialexpress.com", "business-standard.com", "thehindu.com",
-    # Indian GST/accounting blogs with huge content libraries
-    "bankbazaar.com", "paisabazaar.com", "indiafilings.com",
-    "vakilsearch.com", "legalraasta.com", "bajajfinserv.in",
-    # SaaS review/comparison sites
-    "g2.com", "capterra.com", "getapp.com", "softwaresuggest.com",
-    "techjockey.com", "trustradius.com",
-    # Indian billing software competitors
-    "vyapar.in", "profitbooks.net", "marg erp.in",
-}
+TIER_1_DOMAINS, TIER_2_DOMAINS = load_domain_blacklist()
 
 # Scoring weights
 TIER_1_WEIGHT = 3   # Each Tier 1 domain in top 10 adds 3 difficulty points

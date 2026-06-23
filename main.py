@@ -3,13 +3,15 @@
 Main execution script for the InvoHydra SEO Pipeline.
 
 Current agent flow:
-  Agent 1 (Keyword Discoverer)  ← NEW
+  Agent 1 (Keyword Discoverer)
+      ↓
+  Agent 2 (Difficulty Analyst)  ← CONNECTED
       ↓
   Agent 3 (Semantic Clusterer)
       ↓
   Agent 4 (Blog Writer)
 
-Agent 2 (Difficulty Analyst) and Agent 5 (Auto-Publisher) are pending implementation.
+Agent 5 (Auto-Publisher) is pending implementation.
 """
 
 import os
@@ -17,6 +19,7 @@ import json
 import argparse
 from datetime import date
 from agents.discoverer import discover_keywords
+from agents.analyst import analyse_keywords
 from agents.planner import load_keywords, load_feature_truth, cluster_keywords
 from agents.writer import generate_all_blogs
 from config import SEED_TOPICS
@@ -151,13 +154,45 @@ def run_agent_1(topics_to_run: list) -> list:
     return unique_keywords
 
 
+def run_agent_2(keywords: list) -> list:
+    """
+    Runs Agent 2: Analyzes keywords and filters out difficult ones.
+    Saves analysis report to data/difficulty_report.json.
+    Returns the surviving (winnable) keywords.
+    """
+    print("\n" + "═"*60)
+    print("  PHASE 2 — AGENT 2: DIFFICULTY ANALYST")
+    print("═"*60)
+    
+    if not keywords:
+        print("⚠️  No keywords passed to Agent 2. Skipping analysis.")
+        return []
+
+    report = analyse_keywords(keywords)
+    surviving = report.get("surviving_keywords", [])
+    report_path = "data/difficulty_report.json"
+    
+    os.makedirs("data", exist_ok=True)
+    with open(report_path, "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2, ensure_ascii=False)
+        
+    print(f"\n📊  Analyst Results:")
+    print(f"  ├── Passed: {len(report.get('passed', []))}")
+    print(f"  ├── Maybe (Borderline): {len(report.get('maybe', []))}")
+    print(f"  └── Failed (Too Hard): {len(report.get('failed', []))}")
+    print(f"💾  Full difficulty report saved to: {report_path}")
+    print(f"✅  Passing {len(surviving)} winnable keywords to Phase 3.")
+    
+    return surviving
+
+
 def run_agent_3(keywords: list) -> dict:
     """
     Runs Agent 3: clusters keywords against the feature truth map.
     Saves output to CLUSTERS_OUTPUT_PATH.
     """
     print("\n" + "═"*60)
-    print("  PHASE 2 — AGENT 3: SEMANTIC INTENT CLUSTERER")
+    print("  PHASE 3 — AGENT 3: SEMANTIC INTENT CLUSTERER")
     print("═"*60)
 
     print(f"📦  Loading feature capabilities map from: {FEATURES_PATH}")
@@ -182,7 +217,7 @@ def run_agent_3(keywords: list) -> dict:
 def run_agent_4(limit: int = None) -> None:
     """Runs Agent 4: generates one blog post per cluster."""
     print("\n" + "═"*60)
-    print("  PHASE 3 — AGENT 4: BLOG WRITER")
+    print("  PHASE 4 — AGENT 4: BLOG WRITER")
     print("═"*60)
     generate_all_blogs(CLUSTERS_OUTPUT_PATH, BLOGS_DIR, limit=limit)
 
@@ -219,10 +254,17 @@ def main():
             keywords = load_keywords(MANUAL_KEYWORDS_PATH)
             print(f"✅  Fallback loaded {len(keywords)} keywords.")
 
-    # ── Phase 2: Semantic Clustering (Agent 3) ────────────────────────────
-    run_agent_3(keywords)
+    # ── Phase 2: Difficulty Analyst (Agent 2) ─────────────────────────────
+    winnable_keywords = run_agent_2(keywords)
 
-    # ── Phase 3: Blog Generation (Agent 4) ───────────────────────────────
+    if not winnable_keywords:
+        print("\n🛑  Pipeline stopped: No winnable keywords passed Agent 2.")
+        return
+
+    # ── Phase 3: Semantic Clustering (Agent 3) ────────────────────────────
+    run_agent_3(winnable_keywords)
+
+    # ── Phase 4: Blog Generation (Agent 4) ───────────────────────────────
     run_agent_4(limit=args.limit)
 
     # ── Summary ───────────────────────────────────────────────────────────

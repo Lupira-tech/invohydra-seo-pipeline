@@ -1,6 +1,10 @@
 name: InvoHydra SEO Pipeline
 
 on:
+  push:
+    branches:
+      - ci-automation
+
   # ──────────────────────────────────────────────────────────────────────────
   # Twice-weekly schedule: Monday & Thursday at 3:00 AM IST
   # IST is UTC+5:30, so 3:00 AM IST = 9:30 PM UTC (previous day)

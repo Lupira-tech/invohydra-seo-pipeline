@@ -5,13 +5,13 @@ Main execution script for the InvoHydra SEO Pipeline.
 Current agent flow:
   Agent 1 (Keyword Discoverer)
       ↓
-  Agent 2 (Difficulty Analyst)  ← CONNECTED
+  Agent 2 (Difficulty Analyst)
       ↓
   Agent 3 (Semantic Clusterer)
       ↓
   Agent 4 (Blog Writer)
-
-Agent 5 (Auto-Publisher) is pending implementation.
+      ↓
+  Agent 5 (Auto-Publisher)  ← CONNECTED
 """
 
 import os
@@ -22,6 +22,7 @@ from agents.discoverer import discover_keywords
 from agents.analyst import analyse_keywords
 from agents.planner import load_keywords, load_feature_truth, cluster_keywords
 from agents.writer import generate_all_blogs
+from agents.publisher import publish_blogs
 from config import SEED_TOPICS
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -222,6 +223,12 @@ def run_agent_4(limit: int = None) -> None:
     generate_all_blogs(CLUSTERS_OUTPUT_PATH, BLOGS_DIR, limit=limit)
 
 
+def run_agent_5() -> None:
+    """Runs Agent 5: safely pushes generated blogs to the Landing Page repo."""
+    # We call publish_blogs from publisher.py
+    publish_blogs()
+
+
 def main():
     parser = argparse.ArgumentParser(description="InvoHydra SEO Pipeline")
     parser.add_argument("--topic", type=str, help="Manually override the seed topic to generate keywords/blogs for.")
@@ -266,6 +273,9 @@ def main():
 
     # ── Phase 4: Blog Generation (Agent 4) ───────────────────────────────
     run_agent_4(limit=args.limit)
+
+    # ── Phase 5: Auto-Publisher (Agent 5) ────────────────────────────────
+    run_agent_5()
 
     # ── Summary ───────────────────────────────────────────────────────────
     print("\n" + "═"*60)

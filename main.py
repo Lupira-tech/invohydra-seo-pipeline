@@ -11,7 +11,9 @@ Current agent flow:
       ↓
   Agent 4 (Blog Writer)
       ↓
-  Agent 5 (Auto-Publisher)  ← CONNECTED
+  Agent 4.5 (Illustrator)  ← NEW
+      ↓
+  Agent 5 (Auto-Publisher)
 """
 
 import os
@@ -22,6 +24,7 @@ from agents.discoverer import discover_keywords
 from agents.analyst import analyse_keywords
 from agents.planner import load_keywords, load_feature_truth, cluster_keywords
 from agents.writer import generate_all_blogs
+from agents.illustrator import illustrate_blogs
 from agents.publisher import publish_blogs
 from config import SEED_TOPICS
 
@@ -223,6 +226,11 @@ def run_agent_4(limit: int = None) -> None:
     generate_all_blogs(CLUSTERS_OUTPUT_PATH, BLOGS_DIR, limit=limit)
 
 
+def run_agent_4_5() -> None:
+    """Runs Agent 4.5: Illustrates the generated blogs."""
+    illustrate_blogs()
+
+
 def run_agent_5() -> None:
     """Runs Agent 5: safely pushes generated blogs to the Landing Page repo."""
     # We call publish_blogs from publisher.py
@@ -273,6 +281,9 @@ def main():
 
     # ── Phase 4: Blog Generation (Agent 4) ───────────────────────────────
     run_agent_4(limit=args.limit)
+
+    # ── Phase 4.5: Illustrator (Agent 7) ─────────────────────────────────
+    run_agent_4_5()
 
     # ── Phase 5: Auto-Publisher (Agent 5) ────────────────────────────────
     run_agent_5()

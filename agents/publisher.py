@@ -158,15 +158,9 @@ def create_pull_request(repo: str, head_branch: str, base_branch: str = "main") 
 # ──────────────────────────────────────────────────────────────────────────────
 
 def publish_blogs() -> None:
-<<<<<<< HEAD
-    print("\n" + "="*60)
-    print("  🚀  AGENT 5: AUTO-PUBLISHER (LOCAL MERGE)")
-    print("="*60)
-=======
     print("\n" + "═" * 60)
     print("  🚀  AGENT 5: AUTO-PUBLISHER")
     print("═" * 60)
->>>>>>> ci-automation
 
     # 1. Check for blogs
     if not os.path.exists(LOCAL_BLOGS_DIR):
@@ -274,18 +268,6 @@ def publish_blogs() -> None:
             else:
                 print(f"🛑 Push failed: {push_result.stderr}")
         else:
-<<<<<<< HEAD
-            print("   ↳ (No new changes to commit, branch is already up to date).")
-    
-    print("\n" + "="*60)
-    print("  ✅  PUBLISHING COMPLETE")
-    print("="*60)
-    print(f"Next steps:")
-    print(f"1. Open your Landing Page project in VS Code.")
-    print(f"2. Switch to branch '{SAFE_BRANCH_NAME}'.")
-    print(f"3. Run your local server (npm run dev) to test how the blogs look!")
-    print(f"4. If they look good, merge the branch to main.")
-=======
             print(f"🎉 Committed {published_count} blogs to '{SAFE_BRANCH_NAME}' locally!")
 
     # Cleanup workspace in CI
@@ -301,8 +283,6 @@ def publish_blogs() -> None:
         print(f"2. Switch to branch '{SAFE_BRANCH_NAME}'.")
         print(f"3. Run your local server (npm run dev) to test how the blogs look!")
         print(f"4. If they look good, create a PR to merge the branch to main.")
-
->>>>>>> ci-automation
 
 if __name__ == "__main__":
     publish_blogs()

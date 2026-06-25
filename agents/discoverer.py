@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import json
 import requests
 from typing import List, Dict, Any
-from config import GROQ_MODEL, TEMPERATURE
+from config import GROQ_MODEL, TEMPERATURE, call_groq_with_retry
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -247,15 +247,7 @@ def filter_keywords_with_llm(candidates: List[str], seed_topic: str) -> List[str
 
     Falls back to returning the top 15 raw candidates if the API fails.
     """
-    api_key = os.getenv("GROQ_API_KEY")
-    if not api_key:
-        raise ValueError("GROQ_API_KEY is not set in environment variables.")
 
-    url = "https://api.groq.com/openai/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
 
     system_prompt = (
         "You are an expert B2B SEO Keyword Analyst for InvoHydra — a GST billing, invoicing, "
@@ -311,9 +303,8 @@ def filter_keywords_with_llm(candidates: List[str], seed_topic: str) -> List[str
     }
 
     try:
-        response = requests.post(url, json=payload, headers=headers, timeout=30)
-        response.raise_for_status()
-        raw_content = response.json()["choices"][0]["message"]["content"]
+        res_json = call_groq_with_retry(payload, timeout=60)
+        raw_content = res_json["choices"][0]["message"]["content"]
         parsed = json.loads(raw_content)
         keywords = parsed.get("keywords", [])
 
@@ -323,14 +314,8 @@ def filter_keywords_with_llm(candidates: List[str], seed_topic: str) -> List[str
 
         return keywords
 
-    except requests.exceptions.HTTPError as e:
-        print(f"⚠️  Groq API HTTP error: {e}. Using raw candidates as fallback.")
-        return _fallback_clean(candidates)
-    except json.JSONDecodeError as e:
-        print(f"⚠️  Could not parse Groq JSON response: {e}. Using fallback.")
-        return _fallback_clean(candidates)
     except Exception as e:
-        print(f"⚠️  Unexpected LLM error: {e}. Using fallback.")
+        print(f"⚠️  LLM error: {e}. Using fallback.")
         return _fallback_clean(candidates)
 
 

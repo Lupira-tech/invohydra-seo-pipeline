@@ -4,59 +4,49 @@
       "hub_topic": "GST Billing Software for MSME",
       "demand": "High",
       "intent": "Transactional",
-      "product_fit_rationale": "Our auto_gst_calculation and gstin_auto_fetch features support GST billing for MSMEs, making our product a good fit for this cluster.",
+      "product_fit_rationale": "Our product supports auto_gst_calculation, gstin_auto_fetch, and gstr1_reporting_exports, making it a suitable fit for MSMEs looking for GST billing software.",
       "keywords": [
-        "gst billing software for msme",
-        "gst billing software for indian msme",
-        "gst billing software for indian businesses"
+        "best gst billing software for indian msme",
+        "gst compliant invoicing software india",
+        "gst billing software for indian sme",
+        "gst billing software with automatic tax calculation"
       ]
     },
     {
-      "hub_topic": "GST Billing Software Comparison",
+      "hub_topic": "Free and Affordable GST Billing Software",
       "demand": "Medium",
       "intent": "Informational",
-      "product_fit_rationale": "Our razorpay_payment_integration and recurring_invoice_profiles features can be highlighted in comparisons, making our product a viable option for this cluster.",
+      "product_fit_rationale": "Our product offers features like bulk_csv_upload and razorpay_payment_integration, which can be beneficial for businesses looking for affordable GST billing solutions.",
       "keywords": [
-        "best gst billing software india",
-        "best gst billing software comparison"
+        "free gst billing software for msme",
+        "lifetime free gst billing software"
       ]
     },
     {
-      "hub_topic": "Free GST Billing Software",
+      "hub_topic": "GST Billing Software for Specific Industries",
+      "demand": "Low",
+      "intent": "Informational",
+      "product_fit_rationale": "Our product's features like recurring_invoice_profiles and lut_export_support can be useful for various industries, including retail stores and small businesses.",
+      "keywords": [
+        "gst billing software for retail stores",
+        "gst billing software for small businesses india"
+      ]
+    },
+    {
+      "hub_topic": "Choosing the Right GST Billing Software",
       "demand": "Medium",
       "intent": "Informational",
-      "product_fit_rationale": "Our bulk_csv_upload feature can be useful for businesses looking for free GST billing software, making our product a good fit for this cluster.",
+      "product_fit_rationale": "Our product's features like auto_gst_calculation and gstin_auto_fetch can help businesses make informed decisions when choosing a GST billing software.",
       "keywords": [
-        "free gst billing software online"
-      ]
-    },
-    {
-      "hub_topic": "GST Compliant Billing Software",
-      "demand": "High",
-      "intent": "Transactional",
-      "product_fit_rationale": "Our gstr1_reporting_exports and lut_export_support features ensure GST compliance, making our product a good fit for this cluster.",
-      "keywords": [
-        "gst compliant billing software india"
-      ]
-    },
-    {
-      "hub_topic": "Billing Software for Small Businesses",
-      "demand": "High",
-      "intent": "Transactional",
-      "product_fit_rationale": "Our auto_gst_calculation and gstin_auto_fetch features support billing for small businesses, making our product a good fit for this cluster.",
-      "keywords": [
-        "billing software for small businesses in india"
+        "how to choose gst billing software",
+        "features of gst billing software"
       ]
     }
   ],
   "rejected_keywords": [
     {
-      "original": "gst and e way bill software",
-      "reason": "This keyword implies e-way bill generation, which is not supported by our product (e_way_bill_generation is false)."
-    },
-    {
-      "original": "best gst invoicing software india",
-      "reason": "This keyword implies e-invoicing, which is not supported by our product (e_invoicing_generation is false). However, we can support GST billing, which is a related feature."
+      "original": "e way bill integration with gst billing software",
+      "reason": "Our product does not support e-way bill generation, which is a feature implied by this keyword."
     }
   ]
 }

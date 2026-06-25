@@ -3,7 +3,7 @@ import os
 import json
 import re
 import requests
-from config import GROQ_MODEL, TEMPERATURE
+from config import GROQ_MODEL, TEMPERATURE, call_groq_with_retry
 
 BLOGS_DIR = os.path.join("data", "blogs")
 
@@ -26,16 +26,6 @@ URL_MAPPING_INFO = """
 import time
 
 def inject_links_via_llm(markdown_content: str) -> str:
-    api_key = os.getenv("GROQ_API_KEY")
-    if not api_key:
-        raise ValueError("GROQ_API_KEY is not set.")
-        
-    url = "https://api.groq.com/openai/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
     system_prompt = (
         "You are an expert SEO copywriter. Your task is to update the provided blog post (written in Markdown) "
         "by naturally inserting hyperlinks into the text. Do NOT change the structure, headers, or rewrite the core content. "
@@ -57,36 +47,8 @@ def inject_links_via_llm(markdown_content: str) -> str:
         "temperature": 0.2
     }
 
-    max_retries = 5
-    backoff = 4
-    for attempt in range(max_retries):
-        try:
-            response = requests.post(url, json=payload, headers=headers, timeout=60)
-            if response.status_code == 429:
-                # Try to get retry-after header
-                retry_after = response.headers.get("retry-after")
-                sleep_time = int(retry_after) if retry_after and retry_after.isdigit() else backoff
-                print(f"Rate limited (429). Sleeping for {sleep_time}s before retry (attempt {attempt + 1}/{max_retries})...")
-                time.sleep(sleep_time)
-                backoff *= 2
-                continue
-            response.raise_for_status()
-            return response.json()["choices"][0]["message"]["content"].strip()
-        except requests.exceptions.HTTPError as e:
-            if response.status_code == 429:
-                print(f"Rate limited (429). Sleeping for {backoff}s before retry (attempt {attempt + 1}/{max_retries})...")
-                time.sleep(backoff)
-                backoff *= 2
-                continue
-            raise e
-        except Exception as e:
-            if attempt == max_retries - 1:
-                raise e
-            print(f"Error occurred: {e}. Retrying in {backoff}s...")
-            time.sleep(backoff)
-            backoff *= 2
-
-    raise Exception("Failed to call Groq API after maximum retries due to rate limiting or connection errors.")
+    res_json = call_groq_with_retry(payload, timeout=60)
+    return res_json["choices"][0]["message"]["content"].strip()
 
 def main():
     if not os.path.exists(BLOGS_DIR):

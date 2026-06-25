@@ -1,0 +1,297 @@
+{
+  "surviving_keywords": [
+    "best gst billing software for indian msme",
+    "free gst billing software for msme",
+    "gst compliant invoicing software india",
+    "gst billing and accounting software india",
+    "gst billing software for retail stores",
+    "gst invoicing and billing software",
+    "e way bill integration with gst billing software",
+    "gst billing software for indian sme",
+    "lifetime free gst billing software",
+    "gst billing software with expense and cash management",
+    "gst billing software for small businesses india",
+    "how to choose gst billing software",
+    "features of gst billing software",
+    "best gst software for indian msme",
+    "gst billing software with automatic tax calculation"
+  ],
+  "passed": [
+    "best gst billing software for indian msme",
+    "free gst billing software for msme",
+    "gst compliant invoicing software india",
+    "gst billing and accounting software india",
+    "gst billing software for retail stores",
+    "gst invoicing and billing software",
+    "e way bill integration with gst billing software",
+    "gst billing software for indian sme",
+    "lifetime free gst billing software",
+    "gst billing software with expense and cash management"
+  ],
+  "maybe": [
+    "gst billing software for small businesses india",
+    "how to choose gst billing software",
+    "features of gst billing software",
+    "best gst software for indian msme",
+    "gst billing software with automatic tax calculation"
+  ],
+  "failed": [],
+  "full_report": [
+    {
+      "keyword": "best gst billing software for indian msme",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "sleekbill.in",
+        "accountune.com",
+        "tutorial.gst.gov.in",
+        "accoxi.com",
+        "reddit.com"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "gst billing software for small businesses india",
+      "verdict": "MAYBE",
+      "score": 6,
+      "tier1_hits": [
+        "tallysolutions.com",
+        "cleartax.in"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "mybillbook.in",
+        "billingsoftwareindia.in",
+        "khatabilling.com",
+        "vasyerp.com",
+        "gogstbill.com"
+      ],
+      "reason": "Moderate competition (score=6). Tier 1 domains present: tallysolutions.com, cleartax.in. Winnable with strong content."
+    },
+    {
+      "keyword": "free gst billing software for msme",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "zoho.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "tutorial.gst.gov.in",
+        "gogstbill.com",
+        "gstn.org.in",
+        "refrens.com",
+        "khatabilling.com"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "gst compliant invoicing software india",
+      "verdict": "PASS",
+      "score": 1,
+      "tier1_hits": [],
+      "tier2_hits": [
+        "profitbooks.net"
+      ],
+      "top_5_domains": [
+        "gogstbill.com",
+        "invoicefree.in",
+        "mybillbook.in",
+        "gstn.org.in",
+        "billingsoftwareindia.in"
+      ],
+      "reason": "Low authority presence (score=1). Winnable with quality content."
+    },
+    {
+      "keyword": "gst billing and accounting software india",
+      "verdict": "PASS",
+      "score": 1,
+      "tier1_hits": [],
+      "tier2_hits": [
+        "profitbooks.net"
+      ],
+      "top_5_domains": [
+        "gogstbill.com",
+        "tutorial.gst.gov.in",
+        "mybillbook.in",
+        "gstn.org.in",
+        "billingsoftwareindia.in"
+      ],
+      "reason": "Low authority presence (score=1). Winnable with quality content."
+    },
+    {
+      "keyword": "how to choose gst billing software",
+      "verdict": "MAYBE",
+      "score": 4,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
+      "tier2_hits": [
+        "profitbooks.net"
+      ],
+      "top_5_domains": [
+        "gogstbill.com",
+        "profitbooks.net",
+        "refrens.com",
+        "tutorial.gst.gov.in",
+        "gimbooks.com"
+      ],
+      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
+    },
+    {
+      "keyword": "features of gst billing software",
+      "verdict": "MAYBE",
+      "score": 6,
+      "tier1_hits": [
+        "tallysolutions.com",
+        "cleartax.in"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "gogstbill.com",
+        "tutorial.gst.gov.in",
+        "swindia.com",
+        "tallysolutions.com",
+        "cleartax.in"
+      ],
+      "reason": "Moderate competition (score=6). Tier 1 domains present: tallysolutions.com, cleartax.in. Winnable with strong content."
+    },
+    {
+      "keyword": "gst billing software for retail stores",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "vasyerp.com",
+        "mybillbook.in",
+        "tallysolutions.com",
+        "accountune.com",
+        "amazon.in"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "gst invoicing and billing software",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "zoho.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "gogstbill.com",
+        "tutorial.gst.gov.in",
+        "zoho.com",
+        "play.google.com",
+        "mybillbook.in"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "best gst software for indian msme",
+      "verdict": "MAYBE",
+      "score": 6,
+      "tier1_hits": [
+        "cleartax.in",
+        "tallysolutions.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "cleartax.in",
+        "blog.saginfotech.com",
+        "optotax.com",
+        "mastergst.com",
+        "webtel.in"
+      ],
+      "reason": "Moderate competition (score=6). Tier 1 domains present: cleartax.in, tallysolutions.com. Winnable with strong content."
+    },
+    {
+      "keyword": "gst billing software with automatic tax calculation",
+      "verdict": "MAYBE",
+      "score": 4,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
+      "tier2_hits": [
+        "profitbooks.net"
+      ],
+      "top_5_domains": [
+        "mybillbook.in",
+        "billingsoftwareindia.in",
+        "gogstbill.com",
+        "play.google.com",
+        "swindia.com"
+      ],
+      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
+    },
+    {
+      "keyword": "e way bill integration with gst billing software",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "mastergst.com",
+        "mybillbook.in",
+        "docs.ewaybillgst.gov.in",
+        "webtel.in",
+        "gimbooks.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "gst billing software for indian sme",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "zoho.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "sleekbill.in",
+        "mybillbook.in",
+        "gogstbill.com",
+        "gstn.org.in",
+        "swindia.com"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "lifetime free gst billing software",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "gogstbill.com",
+        "billingsoftwareindia.in",
+        "khatabilling.com",
+        "vedbill.com",
+        "catalystk.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "gst billing software with expense and cash management",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "sleekbill.in",
+        "khatabilling.com",
+        "vyaparapp.in",
+        "gimbooks.com",
+        "gogstbill.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    }
+  ]
+}

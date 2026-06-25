@@ -18,19 +18,22 @@ import requests
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
 
 _project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(_project_root, ".env"))
 
 BLOGS_DIR = os.path.join(_project_root, "data", "blogs")
 
+client = None
+
 def setup_gemini():
+    global client
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         print("⚠️ GEMINI_API_KEY is missing. Gemini charts will be skipped.")
         return False
-    genai.configure(api_key=api_key)
+    client = genai.Client(api_key=api_key)
     return True
 
 import random
@@ -72,9 +75,11 @@ def fetch_unsplash_image(query: str) -> str:
         return ""
 
 def generate_mermaid_chart(blog_title: str, blog_content: str) -> str:
-    """Uses Gemini 1.5 Flash to generate a Mermaid.js chart based on the blog text."""
+    """Uses Gemini 2.5 Flash to generate a Mermaid.js chart based on the blog text."""
+    global client
+    if not client:
+        return ""
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
         prompt = (
             f"You are an expert technical illustrator for a B2B SaaS blog. "
             f"Read the following blog post titled '{blog_title}' and create ONE highly relevant, "
@@ -86,7 +91,10 @@ def generate_mermaid_chart(blog_title: str, blog_content: str) -> str:
             f"4. Do NOT use C-style comments like '//' or '#' inside the Mermaid code. Comments in Mermaid must begin with '%%'. Better yet, do not include any comments.\n\n"
             f"Blog Content Preview:\n{blog_content[:3000]}"
         )
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt,
+        )
         text = response.text.strip()
         
         # Clean up in case Gemini added extra markdown wrapping
@@ -141,25 +149,10 @@ def illustrate_blogs():
         else:
             print(f"⏩ [{idx}/{len(blog_files)}] Already has header image. Skipping Unsplash.")
 
-        # 2. Gemini Mermaid Chart
-        if gemini_ready:
-            if "```mermaid" not in body:
-                print(f"✨ [{idx}/{len(blog_files)}] Generating Gemini chart for: '{title}'...")
-                mermaid_code = generate_mermaid_chart(title, body)
-                
-                if mermaid_code:
-                    # Inject the chart after the second paragraph
-                    paragraphs = body.split("\n\n")
-                    if len(paragraphs) > 2:
-                        paragraphs.insert(2, f"\n### Concept Visualization\n{mermaid_code}\n")
-                    else:
-                        paragraphs.append(f"\n### Concept Visualization\n{mermaid_code}\n")
-                        
-                    body = "\n\n".join(paragraphs)
-                    changed = True
-                    print(f"   ✅ Successfully added Gemini Mermaid chart!")
-            else:
-                print(f"⏩ [{idx}/{len(blog_files)}] Already has Gemini chart. Skipping.")
+        # 2. Gemini Mermaid Chart (DISABLED for now until frontend supports it)
+        # If the Next.js frontend doesn't have remark-mermaid installed, it renders as a code block.
+        # We will skip generating it so it doesn't look like broken code to the users.
+        pass
 
         # Save if changes were made
         if changed:

@@ -9,7 +9,7 @@ import os
 import json
 import requests
 from typing import List, Dict, Any
-from config import GROQ_MODEL, TEMPERATURE
+from config import GROQ_MODEL, TEMPERATURE, call_groq_with_retry
 
 def load_keywords(filepath: str) -> List[str]:
     """Loads the seed keywords from a JSON file."""
@@ -40,16 +40,6 @@ def cluster_keywords(keywords: List[str], features: Dict[str, bool]) -> Dict[str
     Submits keywords and product capabilities to the Groq API in JSON mode.
     Enforces demand checking, commercial intent classification, and capability alignment.
     """
-    api_key = os.getenv("GROQ_API_KEY")
-    if not api_key:
-        raise ValueError("GROQ_API_KEY is not set in the environment variables.")
-        
-    url = "https://api.groq.com/openai/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
     # Format features truth map as a readable block for the LLM system prompt
     features_formatted = json.dumps(features, indent=2)
 
@@ -96,9 +86,8 @@ def cluster_keywords(keywords: List[str], features: Dict[str, bool]) -> Dict[str
     }
 
     try:
-        response = requests.post(url, json=user_payload, headers=headers, timeout=30)
-        response.raise_for_status()
-        result_content = response.json()["choices"][0]["message"]["content"]
+        res_json = call_groq_with_retry(user_payload, timeout=60)
+        result_content = res_json["choices"][0]["message"]["content"]
         return json.loads(result_content)
     except Exception as e:
         print(f"⚠️ Groq API request failed: {e}")

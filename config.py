@@ -62,3 +62,53 @@ SEED_TOPICS = [
     "multi-currency invoicing software with Indian GST compliance",
     "real time GST calculation API for Indian marketplaces"
 ]
+
+import time
+import requests
+from typing import Dict, Any
+
+def call_groq_with_retry(payload: Dict[str, Any], timeout: int = 90, max_retries: int = 5, initial_backoff: float = 4.0) -> Dict[str, Any]:
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        raise ValueError("GROQ_API_KEY is not set in the environment variables.")
+        
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    
+    backoff = initial_backoff
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(url, json=payload, headers=headers, timeout=timeout)
+            if response.status_code == 429:
+                retry_after = response.headers.get("retry-after")
+                sleep_time = int(retry_after) if retry_after and retry_after.isdigit() else backoff
+                print(f"⚠️ Groq API Rate Limit (429). Sleeping for {sleep_time}s before retry (attempt {attempt + 1}/{max_retries})...")
+                time.sleep(sleep_time)
+                backoff *= 2
+                continue
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            # check if status code is indeed 429 inside HTTPError
+            status_code = getattr(e.response, 'status_code', None)
+            if status_code == 429:
+                print(f"⚠️ Groq API Rate Limit (429 HTTPError). Sleeping for {backoff}s before retry (attempt {attempt + 1}/{max_retries})...")
+                time.sleep(backoff)
+                backoff *= 2
+                continue
+            if attempt == max_retries - 1:
+                raise e
+            print(f"⚠️ Groq API HTTP error: {e}. Retrying in {backoff}s...")
+            time.sleep(backoff)
+            backoff *= 2
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise e
+            print(f"⚠️ Unexpected error: {e}. Retrying in {backoff}s...")
+            time.sleep(backoff)
+            backoff *= 2
+            
+    raise Exception("Failed to call Groq API after maximum retries due to rate limiting.")

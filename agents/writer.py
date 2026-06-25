@@ -11,7 +11,7 @@ import re
 import requests
 import time
 from typing import List, Dict, Any
-from config import GROQ_MODEL, TEMPERATURE
+from config import GROQ_MODEL, TEMPERATURE, call_groq_with_retry
 
 def load_clusters(filepath: str) -> List[Dict[str, Any]]:
     """Loads the clustered keywords from the JSON output of Agent 3."""
@@ -103,17 +103,7 @@ def get_competitor_context(topic: str) -> Dict[str, Any]:
     return context
 
 def call_llm(system_prompt: str, user_prompt: str, temperature: float, response_format: str = None) -> str:
-    """Helper function to call the Groq API."""
-    api_key = os.getenv("GROQ_API_KEY")
-    if not api_key:
-        raise ValueError("GROQ_API_KEY is not set in the environment variables.")
-        
-    url = "https://api.groq.com/openai/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    
+    """Helper function to call the Groq API with retries and exponential backoff."""
     payload = {
         "model": GROQ_MODEL,
         "messages": [
@@ -125,9 +115,8 @@ def call_llm(system_prompt: str, user_prompt: str, temperature: float, response_
     if response_format == "json":
         payload["response_format"] = {"type": "json_object"}
         
-    response = requests.post(url, json=payload, headers=headers, timeout=90)
-    response.raise_for_status()
-    return response.json()["choices"][0]["message"]["content"]
+    res_json = call_groq_with_retry(payload, timeout=90)
+    return res_json["choices"][0]["message"]["content"]
 
 def generate_blog_post(cluster: Dict[str, Any]) -> Dict[str, Any]:
     """

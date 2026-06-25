@@ -39,24 +39,32 @@ def setup_gemini():
 import random
 
 def generate_image_with_gemini(prompt: str) -> bytes:
-    """Generates an image using Gemini (Imagen 3) and returns the raw bytes."""
+    """Generates an image using Gemini (Nano Banana) and returns the raw bytes."""
     global client
     if not client:
         print("⚠️ Gemini client not initialized. Image generation skipped.")
         return b""
     try:
-        print(f"🎨 Calling Gemini Imagen 3 with prompt: '{prompt}'...")
-        response = client.models.generate_images(
-            model='imagen-3.0-generate-002',
-            prompt=prompt,
-            config=dict(
-                number_of_images=1,
-                output_mime_type="image/jpeg",
-                aspect_ratio="16:9",
+        print(f"🎨 Calling Gemini 2.5 Flash Image with prompt: '{prompt}'...")
+        from google.genai import types
+        response = client.models.generate_content(
+            model='gemini-2.5-flash-image',
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_modalities=["IMAGE"],
+                image_config=types.ImageConfig(
+                    aspect_ratio="16:9",
+                )
             )
         )
-        if response.generated_images:
-            return response.generated_images[0].image.image_bytes
+        if response.parts:
+            for part in response.parts:
+                if part.inline_data and part.inline_data.data:
+                    return part.inline_data.data
+        elif response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
+            for part in response.candidates[0].content.parts:
+                if part.inline_data and part.inline_data.data:
+                    return part.inline_data.data
         return b""
     except Exception as e:
         print(f"⚠️ Gemini Image Generation Failed: {e}")

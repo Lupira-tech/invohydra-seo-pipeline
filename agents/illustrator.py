@@ -42,7 +42,13 @@ def fetch_unsplash_image(query: str) -> str:
         print("⚠️ UNSPLASH_API_KEY is missing. Header images will be skipped.")
         return ""
         
-    url = f"https://api.unsplash.com/search/photos?query={query}&per_page=10&orientation=landscape"
+    # To prevent Unsplash from always returning pictures of "cash" or "money" for billing topics,
+    # we append modern, abstract B2B SaaS aesthetic keywords to the search query.
+    saas_modifiers = ["modern office", "laptop workspace", "startup desk", "technology", "business meeting", "digital dashboard", "professional workspace"]
+    abstract_query = f"{random.choice(saas_modifiers)}"
+    
+    # We use the abstract query to get a high-quality SaaS corporate image
+    url = f"https://api.unsplash.com/search/photos?query={abstract_query}&per_page=15&orientation=landscape"
     headers = {
         "Authorization": f"Client-ID {api_key}"
     }

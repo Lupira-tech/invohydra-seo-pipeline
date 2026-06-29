@@ -80,7 +80,11 @@ def run_auditor():
         return
 
     print(f"📄 Found {len(blog_files)} published blogs. Checking live Google rankings...")
-    print(f"🎯 Target Domain: {TARGET_DOMAIN}\n")
+    print(f"🎯 Target Domain: {TARGET_DOMAIN}")
+    print(f"📂 Blog files found:")
+    for bf in blog_files:
+        print(f"   • {bf}")
+    print()
 
     report = {
         "top_10": [],
@@ -97,8 +101,17 @@ def run_auditor():
                 print(f"⚠️ Error reading {filename}: {e}")
                 continue
         
-        # Try to use target_keyword (new format), fallback to meta_title (old format)
-        keyword = blog_data.get("target_keyword", blog_data.get("meta_title", ""))
+        # Resolve the best keyword to check rankings for:
+        # 1. target_keyword (new blogs have this field)
+        # 2. url_slug converted to natural language (reliable fallback for older blogs)
+        # 3. meta_title as last resort
+        keyword = blog_data.get("target_keyword", "").strip()
+        if not keyword:
+            slug = blog_data.get("url_slug", "")
+            if slug:
+                keyword = slug.replace("-", " ")
+            else:
+                keyword = blog_data.get("meta_title", "")
         if not keyword:
             continue
 

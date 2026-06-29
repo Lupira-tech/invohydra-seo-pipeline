@@ -156,6 +156,7 @@ def create_blog_data_file(blog_data: dict) -> dict:
         "meta_title": blog_data.get("meta_title", "Untitled Blog"),
         "meta_description": blog_data.get("meta_description", ""),
         "url_slug": blog_data.get("url_slug", "untitled"),
+        "target_keyword": blog_data.get("target_keyword", ""),
         "markdown_body": blog_data.get("markdown_body", ""),
         "image": blog_data.get("image", "/meeting.png"),
         "author": "InvoHydra AI",

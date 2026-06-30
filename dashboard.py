@@ -315,13 +315,22 @@ with st.sidebar:
     st.markdown("Enterprise SEO Pipeline Control")
     st.divider()
     
-    st.subheader("System Actions")
+    with st.expander("⚙️ Pipeline Options", expanded=False):
+        topic_override = st.text_input("Topic Override (Optional)", placeholder="e.g., Enterprise SEO")
+        blog_limit = st.number_input("Blog Generation Limit", min_value=1, max_value=20, value=2)
+
     if st.button("Execute AI Pipeline", type="primary", width="stretch"):
         st.info("Pipeline Execution Started.")
         os.makedirs("data", exist_ok=True)
         log_file = open("data/pipeline_run.log", "w", encoding="utf-8")
+        
+        # Build the command with optional arguments
+        cmd = ["python", "-X", "utf8", "main.py", "--limit", str(blog_limit)]
+        if topic_override.strip():
+            cmd.extend(["--topic", topic_override.strip()])
+            
         st.session_state["pipeline_proc"] = subprocess.Popen(
-            ["python", "-X", "utf8", "main.py"],
+            cmd,
             stdout=log_file,
             stderr=subprocess.STDOUT
         )

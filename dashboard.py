@@ -441,9 +441,12 @@ with st.sidebar:
     st.divider()
     
     # Mode Toggle
+    # Default to Cloud Mode if a token is already pre-configured in the server environment
+    default_index = 1 if GITHUB_TOKEN else 0
     mode = st.radio(
         "🖥️ Dashboard Mode",
         ["Local Workspace Files", "Cloud (Remote GitHub Actions)"],
+        index=default_index,
         help="Local mode runs commands on this server. Cloud mode triggers workflows on GitHub and reads published blogs from the website repository."
     )
     is_cloud = (mode == "Cloud (Remote GitHub Actions)")
@@ -976,27 +979,49 @@ with tab_analytics:
 # ─── TAB 5: CONFIGURATION ──────────────────────────────────────────────────
 with tab_config:
     st.subheader("GitHub Automation Settings")
-    st.markdown("Configure your remote GitHub repositories to enable 100% cloud automation from the dashboard.")
     
-    current_repo = os.getenv("GITHUB_REPO", "") or os.getenv("WEBSITE_REPO", "")
-    current_token = os.getenv("GITHUB_TOKEN", "") or os.getenv("WEBSITE_REPO_PAT", "")
-    current_pipeline_repo = os.getenv("PIPELINE_REPO", "jessejaison-cm/invohydra-seo-pipeline")
+    # Check if a PAT token is pre-configured in the server environment (.env or system env)
+    # We load it at the beginning of the file.
+    is_configured_in_env = bool(GITHUB_TOKEN)
     
-    with st.form("github_settings"):
-        st.markdown("**1. Landing Page Repository Name (CMS Output)**")
-        repo_input = st.text_input("Format: username/repo-name (e.g., InvoHydra/InvoHydra-Landing-Page)", value=current_repo)
+    if is_configured_in_env:
+        st.success("🛡️ System is fully configured by the Administrator.")
+        st.markdown(f"""
+        All automation settings and credentials (PAT, Repositories) are securely loaded from the server environment.
+        - **Landing Page (CMS Output)**: `{WEBSITE_REPO}`
+        - **Pipeline Repo (Actions)**: `{PIPELINE_REPO}`
+        - **Status**: Securely Connected
         
-        st.markdown("**2. GitHub Personal Access Token (PAT)**")
-        token_input = st.text_input("Needs 'repo' and 'workflow' scope permissions.", value=current_token, type="password")
+        Public visitors can trigger pipeline automations and view live audit reports immediately. No manual setup is required.
+        """)
         
-        st.markdown("**3. Pipeline Repository Name (Actions & Reports)**")
-        pipeline_repo_input = st.text_input("Format: username/repo-name (e.g., jessejaison-cm/invohydra-seo-pipeline)", value=current_pipeline_repo)
+        show_override = st.checkbox("Show Manual Configuration Overrides (Developer Mode)")
+    else:
+        st.warning("⚠️ Credentials missing. Configure them below to enable Cloud Mode.")
+        show_override = True
+
+    if show_override:
+        st.markdown("Configure your remote GitHub repositories to enable 100% cloud automation from the dashboard.")
+        current_repo = os.getenv("GITHUB_REPO", "") or os.getenv("WEBSITE_REPO", "")
+        current_token = os.getenv("GITHUB_TOKEN", "") or os.getenv("WEBSITE_REPO_PAT", "")
+        current_pipeline_repo = os.getenv("PIPELINE_REPO", "jessejaison-cm/invohydra-seo-pipeline")
         
-        submitted = st.form_submit_button("Save Automation Settings", type="primary")
-        if submitted:
-            if not os.path.exists(env_path):
-                open(env_path, "a").close()
-            set_key(env_path, "GITHUB_REPO", repo_input)
-            set_key(env_path, "GITHUB_TOKEN", token_input)
-            set_key(env_path, "PIPELINE_REPO", pipeline_repo_input)
-            st.success("GitHub Settings Saved Successfully! Restart/refresh page to apply.")
+        from dotenv import set_key
+        with st.form("github_settings"):
+            st.markdown("**1. Landing Page Repository Name (CMS Output)**")
+            repo_input = st.text_input("Format: username/repo-name (e.g., InvoHydra/InvoHydra-Landing-Page)", value=current_repo)
+            
+            st.markdown("**2. GitHub Personal Access Token (PAT)**")
+            token_input = st.text_input("Needs 'repo' and 'workflow' scope permissions.", value=current_token, type="password")
+            
+            st.markdown("**3. Pipeline Repository Name (Actions & Reports)**")
+            pipeline_repo_input = st.text_input("Format: username/repo-name (e.g., jessejaison-cm/invohydra-seo-pipeline)", value=current_pipeline_repo)
+            
+            submitted = st.form_submit_button("Save Automation Settings", type="primary")
+            if submitted:
+                if not os.path.exists(env_path):
+                    open(env_path, "a").close()
+                set_key(env_path, "GITHUB_REPO", repo_input)
+                set_key(env_path, "GITHUB_TOKEN", token_input)
+                set_key(env_path, "PIPELINE_REPO", pipeline_repo_input)
+                st.success("GitHub Settings Saved Successfully! Restart/refresh page to apply.")

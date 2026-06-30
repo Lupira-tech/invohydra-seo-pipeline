@@ -5,6 +5,8 @@ import subprocess
 import time
 import re
 import requests
+import zipfile
+import io
 from dotenv import load_dotenv
 
 # Load configuration at start
@@ -20,6 +22,40 @@ if "pipeline_proc" not in st.session_state:
     st.session_state["pipeline_proc"] = None
 if "audit_proc" not in st.session_state:
     st.session_state["audit_proc"] = None
+if "show_logs_for_run" not in st.session_state:
+    st.session_state["show_logs_for_run"] = None
+if "show_logs_num" not in st.session_state:
+    st.session_state["show_logs_num"] = None
+
+def get_workflow_run_logs(repo, run_id, token=None):
+    url = f"https://api.github.com/repos/{repo}/actions/runs/{run_id}/logs"
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "InvoHydra-SEO-Dashboard"
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    try:
+        res = requests.get(url, headers=headers, timeout=15)
+        if res.status_code == 200:
+            zip_bytes = io.BytesIO(res.content)
+            with zipfile.ZipFile(zip_bytes) as z:
+                log_contents = []
+                for filename in sorted(z.namelist()):
+                    if filename.endswith(".txt") and not filename.startswith("suite_"):
+                        with z.open(filename) as f:
+                            content = f.read().decode("utf-8", errors="ignore")
+                            # Remove ANSI coloring escape codes from terminal logs
+                            clean_content = re.sub(r'\x1b\[[0-9;]*[a-zA-Z]', '', content)
+                            # Shorten file path/name for readability
+                            step_title = filename.split("/")[-1] if "/" in filename else filename
+                            log_contents.append(f"=== Step Log: {step_title} ===\n{clean_content}\n")
+                return "\n".join(log_contents)
+        elif res.status_code == 404:
+            return "No logs generated yet. The workflow might be queued or initiating."
+    except Exception as e:
+        return f"Failed to retrieve workflow logs: {e}"
+    return "Logs could not be fetched (possibly expired or rate limited)."
 
 # Helper functions for GitHub REST API Integration
 def load_json_from_github(repo, path, branch="main", token=None):
@@ -542,26 +578,21 @@ with tab_system:
                     run_num = run.get("run_number")
                     status = run.get("status")
                     conclusion = run.get("conclusion")
-                    run_url = run.get("html_url")
+                    run_id = run.get("id")
                     created_at = run.get("created_at", "").replace("T", " ").replace("Z", "")
                     title = run.get("display_title", "Manual / Scheduled Run")
                     
-                    st.markdown(f"""
-                    <div class="agent-card">
-                        <div class="agent-info">
-                            <div class="agent-header-row">
-                                <p class="agent-title">Run #{run_num}: {title}</p>
-                            </div>
-                            <p class="agent-desc">Started: {created_at} UTC</p>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            {render_gha_status(status, conclusion)}
-                            <a href="{run_url}" target="_blank" style="text-decoration:none;">
-                                <button style="background-color:#1e293b; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Logs ↗</button>
-                            </a>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    with st.container(border=True):
+                        col_run_info, col_run_action = st.columns([5, 1])
+                        with col_run_info:
+                            st.markdown(f"**Run #{run_num}: {title}**")
+                            st.caption(f"Started: {created_at} UTC")
+                            st.markdown(render_gha_status(status, conclusion), unsafe_allow_html=True)
+                        with col_run_action:
+                            if st.button("View Logs", key=f"logs_btn_{run_id}"):
+                                st.session_state["show_logs_for_run"] = run_id
+                                st.session_state["show_logs_num"] = run_num
+                                st.rerun()
             else:
                 st.info("No workflow runs found. Trigger the pipeline first.")
                 
@@ -571,27 +602,41 @@ with tab_system:
                     run_num = run.get("run_number")
                     status = run.get("status")
                     conclusion = run.get("conclusion")
-                    run_url = run.get("html_url")
+                    run_id = run.get("id")
                     created_at = run.get("created_at", "").replace("T", " ").replace("Z", "")
                     
-                    st.markdown(f"""
-                    <div class="agent-card">
-                        <div class="agent-info">
-                            <div class="agent-header-row">
-                                <p class="agent-title">Audit #{run_num}</p>
-                            </div>
-                            <p class="agent-desc">Started: {created_at} UTC</p>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            {render_gha_status(status, conclusion)}
-                            <a href="{run_url}" target="_blank" style="text-decoration:none;">
-                                <button style="background-color:#1e293b; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Logs ↗</button>
-                            </a>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    with st.container(border=True):
+                        col_run_info, col_run_action = st.columns([5, 1])
+                        with col_run_info:
+                            st.markdown(f"**Audit Run #{run_num}**")
+                            st.caption(f"Started: {created_at} UTC")
+                            st.markdown(render_gha_status(status, conclusion), unsafe_allow_html=True)
+                        with col_run_action:
+                            if st.button("View Logs", key=f"logs_btn_{run_id}"):
+                                st.session_state["show_logs_for_run"] = run_id
+                                st.session_state["show_logs_num"] = run_num
+                                st.rerun()
             else:
                 st.info("No audit runs found.")
+                
+            # Log Viewer Section
+            if st.session_state["show_logs_for_run"]:
+                st.write("")
+                st.divider()
+                selected_run_id = st.session_state["show_logs_for_run"]
+                selected_run_num = st.session_state["show_logs_num"]
+                st.subheader(f"🖥️ Execution Logs (Run #{selected_run_num})")
+                
+                col_log_actions_1, col_log_actions_2 = st.columns([5, 1])
+                with col_log_actions_2:
+                    if st.button("Close Logs", key="close_logs_btn"):
+                        st.session_state["show_logs_for_run"] = None
+                        st.session_state["show_logs_num"] = None
+                        st.rerun()
+                        
+                with st.spinner("Downloading and parsing logs from GitHub Actions..."):
+                    logs_content = get_workflow_run_logs(PIPELINE_REPO, selected_run_id, GITHUB_TOKEN)
+                st.code(logs_content, language="text")
         else:
             st.subheader("⚡ Live Agent Workspace")
             st.markdown("Monitor local automated agent interactions during campaign execution.")
@@ -742,33 +787,15 @@ with tab_system:
                 else:
                     st.success("🟢 Ready / Idle")
  
-    # Terminal Log Tail (only relevant in Local Mode)
-    if not is_cloud:
-        if pipeline_active or audit_active:
-            active_log = "data/pipeline_run.log" if pipeline_active else "data/audit_run.log"
-            st.subheader("🖥️ Live Operations Feed")
-            if os.path.exists(active_log):
-                with open(active_log, "r", encoding="utf-8", errors="ignore") as f:
-                    log_data = f.read()
-                st.code(log_data[-4000:], language="text")
-            
-            # Rerun automatically to stream logs
-            time.sleep(1.5)
+    # Auto-refresh loop for live cloud streaming
+    if is_cloud:
+        pipeline_running = pipeline_runs and pipeline_runs[0].get("status") in ["in_progress", "queued"]
+        audit_running = audit_runs and audit_runs[0].get("status") in ["in_progress", "queued"]
+        
+        if pipeline_running or audit_running:
+            st.info("🔄 Active run detected on GitHub. Dashboard is auto-refreshing in 6 seconds to stream live logs and update metrics...")
+            time.sleep(6)
             st.rerun()
-        else:
-            # Show past runs
-            st.write("")
-            col_logs_a, col_logs_b = st.columns(2)
-            with col_logs_a:
-                if os.path.exists("data/pipeline_run.log"):
-                    with st.expander("📄 Last Pipeline Logs"):
-                        with open("data/pipeline_run.log", "r", encoding="utf-8", errors="ignore") as f:
-                            st.code(f.read()[-6000:], language="text")
-            with col_logs_b:
-                if os.path.exists("data/audit_run.log"):
-                    with st.expander("📄 Last Auditor Logs"):
-                        with open("data/audit_run.log", "r", encoding="utf-8", errors="ignore") as f:
-                            st.code(f.read()[-6000:], language="text")
 
 # ─── TAB 2: KEYWORD INTELLIGENCE ─────────────────────────────────────
 with tab_intelligence:

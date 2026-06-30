@@ -4,11 +4,121 @@ import json
 import subprocess
 import time
 import re
+import requests
+from dotenv import load_dotenv
+
+# Load configuration at start
+env_path = os.path.join(os.path.dirname(__file__), ".env")
+load_dotenv(env_path)
+
+WEBSITE_REPO = os.getenv("GITHUB_REPO") or os.getenv("WEBSITE_REPO") or "InvoHydra/InvoHydra-Landing-Page"
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN") or os.getenv("WEBSITE_REPO_PAT") or ""
+PIPELINE_REPO = os.getenv("PIPELINE_REPO") or "jessejaison-cm/invohydra-seo-pipeline"
+SAFE_BRANCH_NAME = os.getenv("PUBLISH_BRANCH", "blog-automation")
 
 if "pipeline_proc" not in st.session_state:
     st.session_state["pipeline_proc"] = None
 if "audit_proc" not in st.session_state:
     st.session_state["audit_proc"] = None
+
+# Helper functions for GitHub REST API Integration
+def load_json_from_github(repo, path, branch="main", token=None):
+    url = f"https://api.github.com/repos/{repo}/contents/{path}?ref={branch}"
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "InvoHydra-SEO-Dashboard"
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    try:
+        res = requests.get(url, headers=headers, timeout=10)
+        if res.status_code == 200:
+            download_url = res.json().get("download_url")
+            if download_url:
+                raw_res = requests.get(download_url, headers=headers, timeout=10)
+                if raw_res.status_code == 200:
+                    return raw_res.json()
+    except Exception as e:
+        pass
+    return {}
+
+def get_blogs_from_github(repo, path="src/app/blog/posts", branch="blog-automation", token=None):
+    url = f"https://api.github.com/repos/{repo}/contents/{path}?ref={branch}"
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "InvoHydra-SEO-Dashboard"
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    blogs = []
+    try:
+        res = requests.get(url, headers=headers, timeout=15)
+        if res.status_code == 200:
+            files_list = res.json()
+            if isinstance(files_list, list):
+                for f in files_list:
+                    if f.get("name", "").endswith(".json") and f.get("type") == "file":
+                        download_url = f.get("download_url")
+                        if download_url:
+                            blog_res = requests.get(download_url, headers=headers, timeout=10)
+                            if blog_res.status_code == 200:
+                                try:
+                                    blogs.append((f.get("name"), blog_res.json()))
+                                except:
+                                    pass
+    except Exception as e:
+        pass
+    return blogs
+
+def trigger_workflow_dispatch(repo, workflow_id, ref="main", inputs=None, token=None):
+    url = f"https://api.github.com/repos/{repo}/actions/workflows/{workflow_id}/dispatches"
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
+        "User-Agent": "InvoHydra-SEO-Dashboard"
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    payload = {"ref": ref}
+    if inputs:
+        payload["inputs"] = inputs
+    try:
+        res = requests.post(url, headers=headers, json=payload, timeout=15)
+        return res.status_code == 204
+    except:
+        return False
+
+def get_workflow_runs(repo, workflow_id, token=None, limit=5):
+    url = f"https://api.github.com/repos/{repo}/actions/workflows/{workflow_id}/runs?per_page={limit}"
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "InvoHydra-SEO-Dashboard"
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    try:
+        res = requests.get(url, headers=headers, timeout=15)
+        if res.status_code == 200:
+            return res.json().get("workflow_runs", [])
+    except:
+        pass
+    return []
+
+def get_run_jobs(repo, run_id, token=None):
+    url = f"https://api.github.com/repos/{repo}/actions/runs/{run_id}/jobs"
+    headers = {
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "InvoHydra-SEO-Dashboard"
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    try:
+        res = requests.get(url, headers=headers, timeout=15)
+        if res.status_code == 200:
+            return res.json().get("jobs", [])
+    except:
+        pass
+    return []
 
 # Configuration
 st.set_page_config(page_title="InvoHydra Enterprise SEO", layout="wide")
@@ -302,50 +412,103 @@ def parse_audit_logs(log_path):
 def render_status(status):
     if status == "running":
         return '<span class="status-badge status-running">● Running</span>'
-    elif status == "completed":
+    elif status == "completed" or status == "success":
         return '<span class="status-badge status-completed">✓ Done</span>'
-    elif status == "failed":
+    elif status == "failed" or status == "failure" or status == "cancelled":
         return '<span class="status-badge status-failed">✗ Failed</span>'
     else:
         return '<span class="status-badge status-pending">○ Pending</span>'
 
-# ─── SIDEBAR: GLOBAL CONTROLS ──────────────────────────────────────────
+# Helper to render GHA status badges
+def render_gha_status(status, conclusion):
+    if status == "in_progress":
+        return '<span class="status-badge status-running">● Running</span>'
+    elif status == "queued":
+        return '<span class="status-badge status-pending">○ Queued</span>'
+    elif status == "completed":
+        if conclusion == "success":
+            return '<span class="status-badge status-completed">✓ Success</span>'
+        elif conclusion == "failure":
+            return '<span class="status-badge status-failed">✗ Failed</span>'
+        else:
+            return f'<span class="status-badge status-failed">✗ {conclusion.capitalize()}</span>'
+    return f'<span class="status-badge status-pending">○ {status.capitalize()}</span>'
+
+# ─── SIDEBAR: MODE & GLOBAL CONTROLS ──────────────────────────────────────────
 with st.sidebar:
     st.title("InvoHydra SEO")
     st.markdown("Enterprise SEO Pipeline Control")
+    st.divider()
+    
+    # Mode Toggle
+    mode = st.radio(
+        "🖥️ Dashboard Mode",
+        ["Local Workspace Files", "Cloud (Remote GitHub Actions)"],
+        help="Local mode runs commands on this server. Cloud mode triggers workflows on GitHub and reads published blogs from the website repository."
+    )
+    is_cloud = (mode == "Cloud (Remote GitHub Actions)")
+    
     st.divider()
     
     with st.expander("⚙️ Pipeline Options", expanded=False):
         topic_override = st.text_input("Topic Override (Optional)", placeholder="e.g., Enterprise SEO")
         blog_limit = st.number_input("Blog Generation Limit", min_value=1, max_value=20, value=2)
 
-    if st.button("Execute AI Pipeline", type="primary", width="stretch"):
-        st.info("Pipeline Execution Started.")
-        os.makedirs("data", exist_ok=True)
-        log_file = open("data/pipeline_run.log", "w", encoding="utf-8")
-        
-        # Build the command with optional arguments
-        cmd = ["python", "-X", "utf8", "main.py", "--limit", str(blog_limit)]
-        if topic_override.strip():
-            cmd.extend(["--topic", topic_override.strip()])
+    if is_cloud:
+        if not GITHUB_TOKEN:
+            st.warning("⚠️ GitHub PAT is not set! Go to the 'Configuration' tab to configure it.")
             
-        st.session_state["pipeline_proc"] = subprocess.Popen(
-            cmd,
-            stdout=log_file,
-            stderr=subprocess.STDOUT
-        )
-        st.rerun()
-        
-    if st.button("Run SEO Rank Audit", width="stretch"):
-        st.info("Audit Execution Started.")
-        os.makedirs("data", exist_ok=True)
-        log_file = open("data/audit_run.log", "w", encoding="utf-8")
-        st.session_state["audit_proc"] = subprocess.Popen(
-            ["python", "-X", "utf8", "agents/auditor.py"],
-            stdout=log_file,
-            stderr=subprocess.STDOUT
-        )
-        st.rerun()
+        if st.button("Execute AI Pipeline (GHA)", type="primary", width="stretch"):
+            inputs = {"limit": str(blog_limit)}
+            if topic_override.strip():
+                inputs["topic"] = topic_override.strip()
+            
+            st.info("Triggering remote GitHub actions workflow...")
+            success = trigger_workflow_dispatch(PIPELINE_REPO, "seo-pipeline.yml", "main", inputs, GITHUB_TOKEN)
+            if success:
+                st.success("🎉 Remote SEO Pipeline triggered successfully!")
+                time.sleep(2)
+                st.rerun()
+            else:
+                st.error("Failed to trigger remote workflow dispatch. Check PAT token & repository configuration.")
+                
+        if st.button("Run SEO Rank Audit (GHA)", width="stretch"):
+            st.info("Triggering remote GitHub Actions auditor...")
+            success = trigger_workflow_dispatch(PIPELINE_REPO, "seo-auditor.yml", "main", None, GITHUB_TOKEN)
+            if success:
+                st.success("🎉 Remote Auditor triggered successfully!")
+                time.sleep(2)
+                st.rerun()
+            else:
+                st.error("Failed to trigger remote workflow dispatch. Check PAT token & repository configuration.")
+    else:
+        if st.button("Execute AI Pipeline (Local)", type="primary", width="stretch"):
+            st.info("Local Pipeline Execution Started.")
+            os.makedirs("data", exist_ok=True)
+            log_file = open("data/pipeline_run.log", "w", encoding="utf-8")
+            
+            # Build the command with optional arguments
+            cmd = ["python", "-X", "utf8", "main.py", "--limit", str(blog_limit)]
+            if topic_override.strip():
+                cmd.extend(["--topic", topic_override.strip()])
+                
+            st.session_state["pipeline_proc"] = subprocess.Popen(
+                cmd,
+                stdout=log_file,
+                stderr=subprocess.STDOUT
+            )
+            st.rerun()
+            
+        if st.button("Run SEO Rank Audit (Local)", width="stretch"):
+            st.info("Local Audit Execution Started.")
+            os.makedirs("data", exist_ok=True)
+            log_file = open("data/audit_run.log", "w", encoding="utf-8")
+            st.session_state["audit_proc"] = subprocess.Popen(
+                ["python", "-X", "utf8", "agents/auditor.py"],
+                stdout=log_file,
+                stderr=subprocess.STDOUT
+            )
+            st.rerun()
         
     st.divider()
     st.caption("System Status: Online")
@@ -356,28 +519,41 @@ st.title("Search Engine Operations")
 st.markdown("Centralized monitoring and control system for automated content generation and ranking analytics.")
 st.divider()
 
-# Load Data for Metrics
-state = load_json(STATE_FILE)
-diff_report = load_json(DIFFICULTY_REPORT)
-audit = load_json(AUDIT_REPORT)
+# Load Data based on Dashboard Mode
+if is_cloud:
+    # 1. Fetch JSON reports from Pipeline Repository main branch
+    st.sidebar.info("🌐 Fetching report data from GitHub...")
+    diff_report = load_json_from_github(PIPELINE_REPO, "data/difficulty_report.json", "main", GITHUB_TOKEN)
+    audit = load_json_from_github(PIPELINE_REPO, "data/audit_report.json", "main", GITHUB_TOKEN)
+    state = load_json_from_github(PIPELINE_REPO, "data/pipeline_state.json", "main", GITHUB_TOKEN)
+    
+    # 2. Fetch published blogs from website repo blog-automation branch
+    remote_blogs = get_blogs_from_github(WEBSITE_REPO, "src/app/blog/posts", "blog-automation", GITHUB_TOKEN)
+    total_blogs = len(remote_blogs)
+else:
+    # Local Mode: load from local files
+    state = load_json(STATE_FILE)
+    diff_report = load_json(DIFFICULTY_REPORT)
+    audit = load_json(AUDIT_REPORT)
+    total_blogs = len([f for f in os.listdir(BLOGS_DIR) if f.endswith('.json')]) if os.path.exists(BLOGS_DIR) else 0
 
+# Calculate Metrics
 passed_kw = len(diff_report.get('surviving_keywords', []))
 failed_kw = len(diff_report.get('failed', []))
-total_blogs = len([f for f in os.listdir(BLOGS_DIR) if f.endswith('.json')]) if os.path.exists(BLOGS_DIR) else 0
-top_10_ranks = audit.get("metrics", {}).get("top_10", 0)
+top_10_ranks = len(audit.get("top_10", [])) if "top_10" in audit else audit.get("metrics", {}).get("top_10", 0)
 
 # Top Metrics Row
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total Blogs Published", total_blogs)
 col2.metric("Top 10 Rankings", top_10_ranks)
 col3.metric("Approved Keywords", passed_kw)
-col4.metric("Current Campaign", state.get('current_topic', 'Idle'))
+col4.metric("Current Campaign Topic", state.get('current_topic', state.get('current_topic_index', 'Idle')))
 
 st.write("") # Spacing
 
-# Check active states
-pipeline_active = st.session_state["pipeline_proc"] is not None and st.session_state["pipeline_proc"].poll() is None
-audit_active = st.session_state["audit_proc"] is not None and st.session_state["audit_proc"].poll() is None
+# Check active states (only relevant in Local Mode)
+pipeline_active = not is_cloud and st.session_state["pipeline_proc"] is not None and st.session_state["pipeline_proc"].poll() is None
+audit_active = not is_cloud and st.session_state["audit_proc"] is not None and st.session_state["audit_proc"].poll() is None
 
 # ─── TABS ────────────────────────────────────────────────────────────
 tab_system, tab_intelligence, tab_library, tab_analytics, tab_config = st.tabs([
@@ -393,166 +569,247 @@ with tab_system:
     col_info_a, col_info_b = st.columns([2, 1])
     
     with col_info_a:
-        st.subheader("⚡ Live Agent Workspace")
-        st.markdown("Monitor automated agent interactions during campaign execution.")
-        
-        # Render the Stepper Pipeline
-        log_path = "data/pipeline_run.log"
-        pipeline_status = parse_pipeline_logs(log_path)
-        
-        st.markdown('<div class="agent-grid">', unsafe_allow_html=True)
-        
-        # Agent 1
-        a1_status = pipeline_status["phases"][1]["status"]
-        a1_details = pipeline_status["phases"][1]["details"]
-        st.markdown(f"""
-        <div class="agent-card">
-            <div class="agent-info">
-                <div class="agent-header-row">
-                    <p class="agent-title">Agent 1: Keyword Discoverer</p>
-                </div>
-                <p class="agent-desc">{a1_details}</p>
-            </div>
-            {render_status(a1_status)}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Agent 2
-        a2_status = pipeline_status["phases"][2]["status"]
-        a2_details = pipeline_status["phases"][2]["details"]
-        st.markdown(f"""
-        <div class="agent-card">
-            <div class="agent-info">
-                <div class="agent-header-row">
-                    <p class="agent-title">Agent 2: Difficulty Analyst</p>
-                </div>
-                <p class="agent-desc">{a2_details}</p>
-            </div>
-            {render_status(a2_status)}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Agent 3
-        a3_status = pipeline_status["phases"][3]["status"]
-        a3_details = pipeline_status["phases"][3]["details"]
-        st.markdown(f"""
-        <div class="agent-card">
-            <div class="agent-info">
-                <div class="agent-header-row">
-                    <p class="agent-title">Agent 3: Semantic Clusterer</p>
-                </div>
-                <p class="agent-desc">{a3_details}</p>
-            </div>
-            {render_status(a3_status)}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Agent 4
-        a4_status = pipeline_status["phases"][4]["status"]
-        a4_details = pipeline_status["phases"][4]["details"]
-        st.markdown(f"""
-        <div class="agent-card">
-            <div class="agent-info">
-                <div class="agent-header-row">
-                    <p class="agent-title">Agent 4: Blog Writer</p>
-                </div>
-                <p class="agent-desc">{a4_details}</p>
-            </div>
-            {render_status(a4_status)}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Agent 4.5
-        a5_status = pipeline_status["phases"][5]["status"]
-        a5_details = pipeline_status["phases"][5]["details"]
-        st.markdown(f"""
-        <div class="agent-card">
-            <div class="agent-info">
-                <div class="agent-header-row">
-                    <p class="agent-title">Agent 4.5: Media Illustrator</p>
-                </div>
-                <p class="agent-desc">{a5_details}</p>
-            </div>
-            {render_status(a5_status)}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Agent 5
-        a6_status = pipeline_status["phases"][6]["status"]
-        a6_details = pipeline_status["phases"][6]["details"]
-        st.markdown(f"""
-        <div class="agent-card">
-            <div class="agent-info">
-                <div class="agent-header-row">
-                    <p class="agent-title">Agent 5: Auto-Publisher</p>
-                </div>
-                <p class="agent-desc">{a6_details}</p>
-            </div>
-            {render_status(a6_status)}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Agent 6 (Performance Auditor) - Show if Auditor is active or has run previously
-        audit_log_path = "data/audit_run.log"
-        audit_status = parse_audit_logs(audit_log_path)
-        if audit_active or audit_status["status"] != "pending":
+        if is_cloud:
+            st.subheader("🌐 GitHub Actions Workflow Runs")
+            st.markdown("Monitor remote automation tasks executing on GitHub runners.")
+            
+            # Fetch runs
+            pipeline_runs = get_workflow_runs(PIPELINE_REPO, "seo-pipeline.yml", GITHUB_TOKEN, limit=3)
+            audit_runs = get_workflow_runs(PIPELINE_REPO, "seo-auditor.yml", GITHUB_TOKEN, limit=3)
+            
+            st.markdown("### 🤖 Pipeline Runs (`seo-pipeline.yml`)")
+            if pipeline_runs:
+                for run in pipeline_runs:
+                    run_num = run.get("run_number")
+                    status = run.get("status")
+                    conclusion = run.get("conclusion")
+                    run_url = run.get("html_url")
+                    created_at = run.get("created_at", "").replace("T", " ").replace("Z", "")
+                    title = run.get("display_title", "Manual / Scheduled Run")
+                    
+                    st.markdown(f"""
+                    <div class="agent-card">
+                        <div class="agent-info">
+                            <div class="agent-header-row">
+                                <p class="agent-title">Run #{run_num}: {title}</p>
+                            </div>
+                            <p class="agent-desc">Started: {created_at} UTC</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            {render_gha_status(status, conclusion)}
+                            <a href="{run_url}" target="_blank" style="text-decoration:none;">
+                                <button style="background-color:#1e293b; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Logs ↗</button>
+                            </a>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+            else:
+                st.info("No workflow runs found. Trigger the pipeline first.")
+                
+            st.markdown("### 🕵️ Auditor Runs (`seo-auditor.yml`)")
+            if audit_runs:
+                for run in audit_runs:
+                    run_num = run.get("run_number")
+                    status = run.get("status")
+                    conclusion = run.get("conclusion")
+                    run_url = run.get("html_url")
+                    created_at = run.get("created_at", "").replace("T", " ").replace("Z", "")
+                    
+                    st.markdown(f"""
+                    <div class="agent-card">
+                        <div class="agent-info">
+                            <div class="agent-header-row">
+                                <p class="agent-title">Audit #{run_num}</p>
+                            </div>
+                            <p class="agent-desc">Started: {created_at} UTC</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            {render_gha_status(status, conclusion)}
+                            <a href="{run_url}" target="_blank" style="text-decoration:none;">
+                                <button style="background-color:#1e293b; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Logs ↗</button>
+                            </a>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+            else:
+                st.info("No audit runs found.")
+        else:
+            st.subheader("⚡ Live Agent Workspace")
+            st.markdown("Monitor local automated agent interactions during campaign execution.")
+            
+            # Render the Stepper Pipeline
+            log_path = "data/pipeline_run.log"
+            pipeline_status = parse_pipeline_logs(log_path)
+            
+            st.markdown('<div class="agent-grid">', unsafe_allow_html=True)
+            
+            # Agent 1
+            a1_status = pipeline_status["phases"][1]["status"]
+            a1_details = pipeline_status["phases"][1]["details"]
             st.markdown(f"""
             <div class="agent-card">
                 <div class="agent-info">
                     <div class="agent-header-row">
-                        <p class="agent-title">Agent 6: Performance Auditor</p>
+                        <p class="agent-title">Agent 1: Keyword Discoverer</p>
                     </div>
-                    <p class="agent-desc">{audit_status["details"]}</p>
+                    <p class="agent-desc">{a1_details}</p>
                 </div>
-                {render_status(audit_status["status"])}
+                {render_status(a1_status)}
             </div>
             """, unsafe_allow_html=True)
             
-        st.markdown('</div>', unsafe_allow_html=True)
+            # Agent 2
+            a2_status = pipeline_status["phases"][2]["status"]
+            a2_details = pipeline_status["phases"][2]["details"]
+            st.markdown(f"""
+            <div class="agent-card">
+                <div class="agent-info">
+                    <div class="agent-header-row">
+                        <p class="agent-title">Agent 2: Difficulty Analyst</p>
+                    </div>
+                    <p class="agent-desc">{a2_details}</p>
+                </div>
+                {render_status(a2_status)}
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Agent 3
+            a3_status = pipeline_status["phases"][3]["status"]
+            a3_details = pipeline_status["phases"][3]["details"]
+            st.markdown(f"""
+            <div class="agent-card">
+                <div class="agent-info">
+                    <div class="agent-header-row">
+                        <p class="agent-title">Agent 3: Semantic Clusterer</p>
+                    </div>
+                    <p class="agent-desc">{a3_details}</p>
+                </div>
+                {render_status(a3_status)}
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Agent 4
+            a4_status = pipeline_status["phases"][4]["status"]
+            a4_details = pipeline_status["phases"][4]["details"]
+            st.markdown(f"""
+            <div class="agent-card">
+                <div class="agent-info">
+                    <div class="agent-header-row">
+                        <p class="agent-title">Agent 4: Blog Writer</p>
+                    </div>
+                    <p class="agent-desc">{a4_details}</p>
+                </div>
+                {render_status(a4_status)}
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Agent 4.5
+            a5_status = pipeline_status["phases"][5]["status"]
+            a5_details = pipeline_status["phases"][5]["details"]
+            st.markdown(f"""
+            <div class="agent-card">
+                <div class="agent-info">
+                    <div class="agent-header-row">
+                        <p class="agent-title">Agent 4.5: Media Illustrator</p>
+                    </div>
+                    <p class="agent-desc">{a5_details}</p>
+                </div>
+                {render_status(a5_status)}
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Agent 5
+            a6_status = pipeline_status["phases"][6]["status"]
+            a6_details = pipeline_status["phases"][6]["details"]
+            st.markdown(f"""
+            <div class="agent-card">
+                <div class="agent-info">
+                    <div class="agent-header-row">
+                        <p class="agent-title">Agent 5: Auto-Publisher</p>
+                    </div>
+                    <p class="agent-desc">{a6_details}</p>
+                </div>
+                {render_status(a6_status)}
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Agent 6 (Performance Auditor)
+            audit_log_path = "data/audit_run.log"
+            audit_status = parse_audit_logs(audit_log_path)
+            if audit_active or audit_status["status"] != "pending":
+                st.markdown(f"""
+                <div class="agent-card">
+                    <div class="agent-info">
+                        <div class="agent-header-row">
+                            <p class="agent-title">Agent 6: Performance Auditor</p>
+                        </div>
+                        <p class="agent-desc">{audit_status["details"]}</p>
+                    </div>
+                    {render_status(audit_status["status"])}
+                </div>
+                """, unsafe_allow_html=True)
+                
+            st.markdown('</div>', unsafe_allow_html=True)
         
     with col_info_b:
         st.subheader("📋 Pipeline Context")
         with st.container(border=True):
-            st.markdown("**Campaign Active:**")
-            st.write(state.get('current_topic', 'None (Idle)'))
-            st.markdown("**Last Action Date:**")
-            st.write(state.get('last_run_date', 'None'))
-            st.markdown("**Domain Host:**")
-            st.write(audit.get('target_domain', 'invohydra.com'))
-            st.markdown("**Health Status:**")
-            if pipeline_active:
-                st.info("⚡ Execution In Progress")
-            elif audit_active:
-                st.info("🕵️ Rank Auditing In Progress")
+            st.markdown("**Campaign Active / Selected Index:**")
+            if is_cloud:
+                idx = state.get("current_topic_index", "N/A")
+                st.write(f"Index {idx} of 16 (Seed topic rotates dynamically)")
             else:
-                st.success("🟢 Ready / Idle")
-
-    # Terminal Log Tail
-    if pipeline_active or audit_active:
-        active_log = "data/pipeline_run.log" if pipeline_active else "data/audit_run.log"
-        st.subheader("🖥️ Live Operations Feed")
-        if os.path.exists(active_log):
-            with open(active_log, "r", encoding="utf-8", errors="ignore") as f:
-                log_data = f.read()
-            st.code(log_data[-4000:], language="text")
-        
-        # Rerun automatically to stream logs
-        time.sleep(1.5)
-        st.rerun()
-    else:
-        # Show past runs
-        st.write("")
-        col_logs_a, col_logs_b = st.columns(2)
-        with col_logs_a:
-            if os.path.exists("data/pipeline_run.log"):
-                with st.expander("📄 Last Pipeline Logs"):
-                    with open("data/pipeline_run.log", "r", encoding="utf-8", errors="ignore") as f:
-                        st.code(f.read()[-6000:], language="text")
-        with col_logs_b:
-            if os.path.exists("data/audit_run.log"):
-                with st.expander("📄 Last Auditor Logs"):
-                    with open("data/audit_run.log", "r", encoding="utf-8", errors="ignore") as f:
-                        st.code(f.read()[-6000:], language="text")
+                st.write(state.get('current_topic', 'None (Idle)'))
+            st.markdown("**Last Action Date:**")
+            st.write(state.get('last_run_date', state.get('last_topic_change_date', 'None')))
+            st.markdown("**Domain Host:**")
+            st.write(WEBSITE_REPO.split("/")[-1] if "/" in WEBSITE_REPO else WEBSITE_REPO)
+            st.markdown("**Health Status:**")
+            if is_cloud:
+                # Find if any active GHA run is executing
+                pipeline_running = pipeline_runs and pipeline_runs[0].get("status") in ["in_progress", "queued"]
+                audit_running = audit_runs and audit_runs[0].get("status") in ["in_progress", "queued"]
+                if pipeline_running:
+                    st.info("⚡ Pipeline Running on GitHub")
+                elif audit_running:
+                    st.info("🕵️ Auditor Running on GitHub")
+                else:
+                    st.success("🟢 Ready (All Workflows Idle)")
+            else:
+                if pipeline_active:
+                    st.info("⚡ Execution In Progress")
+                elif audit_active:
+                    st.info("🕵️ Rank Auditing In Progress")
+                else:
+                    st.success("🟢 Ready / Idle")
+ 
+    # Terminal Log Tail (only relevant in Local Mode)
+    if not is_cloud:
+        if pipeline_active or audit_active:
+            active_log = "data/pipeline_run.log" if pipeline_active else "data/audit_run.log"
+            st.subheader("🖥️ Live Operations Feed")
+            if os.path.exists(active_log):
+                with open(active_log, "r", encoding="utf-8", errors="ignore") as f:
+                    log_data = f.read()
+                st.code(log_data[-4000:], language="text")
+            
+            # Rerun automatically to stream logs
+            time.sleep(1.5)
+            st.rerun()
+        else:
+            # Show past runs
+            st.write("")
+            col_logs_a, col_logs_b = st.columns(2)
+            with col_logs_a:
+                if os.path.exists("data/pipeline_run.log"):
+                    with st.expander("📄 Last Pipeline Logs"):
+                        with open("data/pipeline_run.log", "r", encoding="utf-8", errors="ignore") as f:
+                            st.code(f.read()[-6000:], language="text")
+            with col_logs_b:
+                if os.path.exists("data/audit_run.log"):
+                    with st.expander("📄 Last Auditor Logs"):
+                        with open("data/audit_run.log", "r", encoding="utf-8", errors="ignore") as f:
+                            st.code(f.read()[-6000:], language="text")
 
 # ─── TAB 2: KEYWORD INTELLIGENCE ─────────────────────────────────────
 with tab_intelligence:
@@ -575,13 +832,12 @@ with tab_intelligence:
                 full_report = diff_report.get('full_report', [])
                 failed_data = []
                 for kw in failed_kws:
-                    reason = "Too competitive"
-                    # Find reason in full report
-                    for item in full_report:
-                        if item.get("keyword") == kw:
-                            reason = item.get("reason", reason)
-                            break
-                    failed_data.append({"Keyword": kw, "Rejection Reason": reason})
+                     reason = "Too competitive"
+                     for item in full_report:
+                         if item.get("keyword") == kw:
+                             reason = item.get("reason", reason)
+                             break
+                     failed_data.append({"Keyword": kw, "Rejection Reason": reason})
                 st.dataframe(failed_data, width="stretch", hide_index=True)
                 
         st.divider()
@@ -598,22 +854,26 @@ with tab_intelligence:
                 })
             st.dataframe(report_data, width="stretch", hide_index=True)
             
-        CLUSTERS_FILE = os.path.join(DATA_DIR, "clustered_keywords.json")
-        if os.path.exists(CLUSTERS_FILE):
+        CLUSTERS_FILE = os.path.join(DATA_DIR, "clustered_keywords.json") if not is_cloud else None
+        clusters_data = None
+        if is_cloud:
+            clusters_data = load_json_from_github(PIPELINE_REPO, "data/clustered_keywords.json", "main", GITHUB_TOKEN)
+        elif CLUSTERS_FILE and os.path.exists(CLUSTERS_FILE):
             clusters_data = load_json(CLUSTERS_FILE)
-            if clusters_data and "clusters" in clusters_data:
-                st.divider()
-                st.markdown("**Semantic Clusters & Capability Alignment**")
-                cluster_rows = []
-                for cluster in clusters_data["clusters"]:
-                    cluster_rows.append({
-                        "Hub Topic": cluster.get("hub_topic"),
-                        "Demand": cluster.get("demand"),
-                        "Intent": cluster.get("intent"),
-                        "Product Fit Rationale": cluster.get("product_fit_rationale"),
-                        "Keywords": ", ".join(cluster.get("keywords", []))
-                    })
-                st.dataframe(cluster_rows, width="stretch", hide_index=True)
+            
+        if clusters_data and "clusters" in clusters_data:
+            st.divider()
+            st.markdown("**Semantic Clusters & Capability Alignment**")
+            cluster_rows = []
+            for cluster in clusters_data["clusters"]:
+                cluster_rows.append({
+                    "Hub Topic": cluster.get("hub_topic"),
+                    "Demand": cluster.get("demand"),
+                    "Intent": cluster.get("intent"),
+                    "Product Fit Rationale": cluster.get("product_fit_rationale"),
+                    "Keywords": ", ".join(cluster.get("keywords", []))
+                })
+            st.dataframe(cluster_rows, width="stretch", hide_index=True)
     else:
         st.warning("No keyword intelligence data available. Execute the pipeline to populate this section.")
 
@@ -622,27 +882,46 @@ with tab_library:
     st.subheader("Content Management System")
     st.markdown("Review and manage AI-generated editorial content before final deployment.")
     
-    if os.path.exists(BLOGS_DIR) and total_blogs > 0:
-        blog_files = [f for f in os.listdir(BLOGS_DIR) if f.endswith('.json')]
-        
-        for file in blog_files:
-            blog_data = load_json(os.path.join(BLOGS_DIR, file))
-            title = blog_data.get("meta_title", "Untitled Document")
-            
-            with st.expander(f"{title}"):
-                col_meta, col_content = st.columns([1, 2])
-                with col_meta:
-                    st.markdown("**Target Keyword**")
-                    st.write(f"`{blog_data.get('target_keyword', 'N/A')}`")
-                    st.markdown("**Meta Description**")
-                    st.write(blog_data.get('meta_description', 'N/A'))
-                    st.markdown("**File System Reference**")
-                    st.code(file)
-                with col_content:
-                    st.markdown("**Markdown Body Preview**")
-                    st.markdown(blog_data.get("markdown_body", "No content available."))
+    if is_cloud:
+        st.markdown(f"📂 *Showing blogs published on the `{SAFE_BRANCH_NAME}` branch of `{WEBSITE_REPO}`*")
+        if remote_blogs:
+            for file, blog_data in remote_blogs:
+                title = blog_data.get("meta_title", "Untitled Document")
+                with st.expander(f"📄 {title}"):
+                    col_meta, col_content = st.columns([1, 2])
+                    with col_meta:
+                        st.markdown("**Target Keyword**")
+                        st.write(f"`{blog_data.get('target_keyword', 'N/A')}`")
+                        st.markdown("**Meta Description**")
+                        st.write(blog_data.get('meta_description', 'N/A'))
+                        st.markdown("**Repository Filename**")
+                        st.code(file)
+                    with col_content:
+                        st.markdown("**Markdown Body Preview**")
+                        st.markdown(blog_data.get("markdown_body", "No content available."))
+        else:
+            st.warning("Content library is currently empty or remote repository blogs folder could not be read.")
     else:
-        st.warning("Content library is currently empty.")
+        st.markdown("📂 *Showing blogs generated locally in this workspace*")
+        if os.path.exists(BLOGS_DIR) and total_blogs > 0:
+            blog_files = [f for f in os.listdir(BLOGS_DIR) if f.endswith('.json')]
+            for file in blog_files:
+                blog_data = load_json(os.path.join(BLOGS_DIR, file))
+                title = blog_data.get("meta_title", "Untitled Document")
+                with st.expander(f"{title}"):
+                    col_meta, col_content = st.columns([1, 2])
+                    with col_meta:
+                        st.markdown("**Target Keyword**")
+                        st.write(f"`{blog_data.get('target_keyword', 'N/A')}`")
+                        st.markdown("**Meta Description**")
+                        st.write(blog_data.get('meta_description', 'N/A'))
+                        st.markdown("**File System Reference**")
+                        st.code(file)
+                    with col_content:
+                        st.markdown("**Markdown Body Preview**")
+                        st.markdown(blog_data.get("markdown_body", "No content available."))
+        else:
+            st.warning("Content library is currently empty.")
 
 # ─── TAB 4: RANKING ANALYTICS ──────────────────────────────────────────────
 with tab_analytics:
@@ -650,39 +929,68 @@ with tab_analytics:
     st.markdown("Continuous monitoring of target keywords against the primary domain.")
     
     if audit:
+        # Resolve metrics dynamically based on three categories
+        n_top10 = len(audit.get("top_10", []))
+        n_page2 = len(audit.get("page_2_refresh", []))
+        n_unranked = len(audit.get("not_found_or_deep", []))
+        
         with st.container(border=True):
-            metrics = audit.get("metrics", {})
             m1, m2, m3 = st.columns(3)
-            m1.metric("Pages in Top 10", metrics.get("top_10", 0))
-            m2.metric("Pages on Page 2 (Needs Refresh)", metrics.get("page_2", 0))
-            m3.metric("Pages Unranked", metrics.get("not_found", 0))
+            m1.metric("Pages in Top 10", n_top10)
+            m2.metric("Pages on Page 2 (Needs Refresh)", n_page2)
+            m3.metric("Pages Unranked / Deep", n_unranked)
             
         st.write("")
         st.markdown("**Detailed Position Tracking**")
-        if audit.get("detailed_results"):
-            results = [{"Target Keyword": k, "SERP Position": v["position"], "Resolved URL": v["url"]} for k, v in audit["detailed_results"].items()]
-            st.dataframe(results, width="stretch", hide_index=True)
+        
+        all_results = []
+        for item in audit.get("top_10", []):
+            all_results.append({
+                "Target Keyword": item.get("keyword"),
+                "SERP Position": item.get("rank"),
+                "Blog File": item.get("filename"),
+                "Resolved URL": item.get("url")
+            })
+        for item in audit.get("page_2_refresh", []):
+            all_results.append({
+                "Target Keyword": item.get("keyword"),
+                "SERP Position": item.get("rank"),
+                "Blog File": item.get("filename"),
+                "Resolved URL": item.get("url")
+            })
+        for item in audit.get("not_found_or_deep", []):
+            all_results.append({
+                "Target Keyword": item.get("keyword"),
+                "SERP Position": "Not Found / Deep" if item.get("rank") == -1 else item.get("rank"),
+                "Blog File": item.get("filename"),
+                "Resolved URL": item.get("url") or "N/A"
+            })
+            
+        if all_results:
+            st.dataframe(all_results, width="stretch", hide_index=True)
+        else:
+            st.info("No rankings recorded in the report.")
     else:
         st.warning("Analytics data unavailable. Execute an SEO Rank Audit from the sidebar.")
 
 # ─── TAB 5: CONFIGURATION ──────────────────────────────────────────────────
 with tab_config:
     st.subheader("GitHub Automation Settings")
-    st.markdown("Configure your remote GitHub connection to enable 100% cloud automation.")
+    st.markdown("Configure your remote GitHub repositories to enable 100% cloud automation from the dashboard.")
     
-    from dotenv import load_dotenv, set_key
-    env_path = os.path.join(os.path.dirname(__file__), ".env")
-    load_dotenv(env_path)
-    
-    current_repo = os.getenv("GITHUB_REPO", "")
-    current_token = os.getenv("GITHUB_TOKEN", "")
+    current_repo = os.getenv("GITHUB_REPO", "") or os.getenv("WEBSITE_REPO", "")
+    current_token = os.getenv("GITHUB_TOKEN", "") or os.getenv("WEBSITE_REPO_PAT", "")
+    current_pipeline_repo = os.getenv("PIPELINE_REPO", "jessejaison-cm/invohydra-seo-pipeline")
     
     with st.form("github_settings"):
-        st.markdown("**1. Landing Page Repository Name**")
-        repo_input = st.text_input("Format: username/repo-name (e.g., invohydra/landing-page)", value=current_repo)
+        st.markdown("**1. Landing Page Repository Name (CMS Output)**")
+        repo_input = st.text_input("Format: username/repo-name (e.g., InvoHydra/InvoHydra-Landing-Page)", value=current_repo)
         
         st.markdown("**2. GitHub Personal Access Token (PAT)**")
-        token_input = st.text_input("Needs 'repo' scope permissions.", value=current_token, type="password")
+        token_input = st.text_input("Needs 'repo' and 'workflow' scope permissions.", value=current_token, type="password")
+        
+        st.markdown("**3. Pipeline Repository Name (Actions & Reports)**")
+        pipeline_repo_input = st.text_input("Format: username/repo-name (e.g., jessejaison-cm/invohydra-seo-pipeline)", value=current_pipeline_repo)
         
         submitted = st.form_submit_button("Save Automation Settings", type="primary")
         if submitted:
@@ -690,4 +998,5 @@ with tab_config:
                 open(env_path, "a").close()
             set_key(env_path, "GITHUB_REPO", repo_input)
             set_key(env_path, "GITHUB_TOKEN", token_input)
-            st.success("GitHub Settings Saved Successfully!")
+            set_key(env_path, "PIPELINE_REPO", pipeline_repo_input)
+            st.success("GitHub Settings Saved Successfully! Restart/refresh page to apply.")

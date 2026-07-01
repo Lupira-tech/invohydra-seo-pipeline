@@ -1,57 +1,34 @@
 {
   "clusters": [
     {
-      "hub_topic": "Online Payment Collection and Invoicing for Indian Businesses",
+      "hub_topic": "Razorpay Payment Integration",
       "demand": "High",
       "intent": "Transactional",
-      "product_fit_rationale": "Our product supports features like razorpay_payment_integration, multi_payment_methods, and gst_compliance, which align with the need for online payment collection and invoicing solutions for Indian businesses.",
+      "product_fit_rationale": "Our product supports razorpay payment integration, which allows for secure and efficient payment processing. This feature is explicitly mentioned in the capability truth map as 'razorpay_payment_integration': true.",
       "keywords": [
-        "online payment collection for indian businesses",
-        "online payment gateways for indian businesses",
-        "gst compliant invoicing for indian businesses",
-        "online invoice payment collection software",
-        "payment collection and invoice management software"
-      ]
-    },
-    {
-      "hub_topic": "Invoicing and Billing Solutions for Retail and E-commerce",
-      "demand": "Medium",
-      "intent": "Informational",
-      "product_fit_rationale": "Features like invoice_template_customization, branded_templates, and smart_invoice_management support the need for customized invoicing and billing solutions for retail and e-commerce businesses.",
-      "keywords": [
-        "how to collect payments in retail business",
-        "best invoicing software for small business india",
-        "best billing software for retail shops in india",
-        "invoice management for modern businesses india"
-      ]
-    },
-    {
-      "hub_topic": "Selecting the Right Payment and Invoicing Solution",
-      "demand": "Low",
-      "intent": "Informational",
-      "product_fit_rationale": "Our product's features like multi_payment_methods, gst_compliance, and smart_invoice_management can help businesses choose the right payment and invoicing solution.",
-      "keywords": [
-        "how to select right payment solution for business",
-        "how to choose right invoicing software for business"
+        "razorpay payment link integration",
+        "razorpay payment links for invoices",
+        "razorpay payment gateway for small business",
+        "create payment links with razorpay",
+        "razorpay invoice payment integration",
+        "integrate razorpay with existing billing",
+        "razorpay payment solutions for msme",
+        "razorpay payment link for recurring payments",
+        "secure payment integration with razorpay",
+        "invoicing apps with razorpay payment gateway",
+        "invoicing software with payment gateway",
+        "how to integrate razorpay with invoicing"
       ]
     }
   ],
   "rejected_keywords": [
     {
-      "original": "how to pay international invoices online in india",
-      "reason": "This keyword implies international invoice payment, which may not be directly supported by our current features."
+      "original": "payment link integration with invoicing",
+      "reason": "This keyword is too generic and does not explicitly mention Razorpay, which is the specific payment gateway our product supports."
     },
     {
-      "original": "recurring payments in india for global companies",
-      "reason": "While we support recurring_invoice_profiles, the keyword's focus on global companies may imply features beyond our current capabilities."
-    },
-    {
-      "original": "accepting international payments in india",
-      "reason": "This keyword implies international payment acceptance, which may not be directly supported by our current features."
-    },
-    {
-      "original": "online payment systems for e-commerce businesses india",
-      "reason": "This keyword is too broad and was already covered by more specific keywords in other clusters."
+      "original": "razorpay payment links for business owners",
+      "reason": "This keyword is too broad and does not specifically relate to our product's invoicing and payment integration features."
     }
   ]
 }

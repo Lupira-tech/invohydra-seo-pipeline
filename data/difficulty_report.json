@@ -1,255 +1,57 @@
 {
   "surviving_keywords": [
-    "online payment collection for indian businesses",
-    "how to collect payments in retail business",
-    "online payment gateways for indian businesses",
-    "how to pay international invoices online in india",
-    "recurring payments in india for global companies",
-    "accepting international payments in india",
-    "gst compliant invoicing for indian businesses",
-    "online invoice payment collection software",
-    "how to select right payment solution for business",
-    "payment collection and invoice management software",
-    "online payment systems for e-commerce businesses india",
-    "best invoicing software for small business india",
-    "best billing software for retail shops in india",
-    "invoice management for modern businesses india",
-    "how to choose right invoicing software for business"
+    "razorpay payment link integration",
+    "razorpay payment links for invoices",
+    "razorpay payment gateway for small business",
+    "create payment links with razorpay",
+    "razorpay invoice payment integration",
+    "payment link integration with invoicing",
+    "razorpay payment solutions for msme",
+    "integrate razorpay with existing billing",
+    "razorpay payment link for recurring payments",
+    "secure payment integration with razorpay",
+    "razorpay payment links for business owners",
+    "invoicing apps with razorpay payment gateway",
+    "invoicing software with payment gateway",
+    "how to integrate razorpay with invoicing"
   ],
   "passed": [
-    "online payment collection for indian businesses",
-    "how to collect payments in retail business",
-    "online payment gateways for indian businesses",
-    "how to pay international invoices online in india",
-    "recurring payments in india for global companies",
-    "accepting international payments in india",
-    "gst compliant invoicing for indian businesses",
-    "online invoice payment collection software",
-    "how to select right payment solution for business",
-    "payment collection and invoice management software",
-    "online payment systems for e-commerce businesses india"
+    "razorpay payment link integration",
+    "razorpay payment links for invoices",
+    "razorpay payment gateway for small business",
+    "create payment links with razorpay",
+    "razorpay invoice payment integration",
+    "payment link integration with invoicing",
+    "razorpay payment solutions for msme",
+    "integrate razorpay with existing billing",
+    "razorpay payment link for recurring payments",
+    "secure payment integration with razorpay",
+    "razorpay payment links for business owners",
+    "invoicing apps with razorpay payment gateway"
   ],
   "maybe": [
-    "best invoicing software for small business india",
-    "best billing software for retail shops in india",
-    "invoice management for modern businesses india",
-    "how to choose right invoicing software for business"
+    "invoicing software with payment gateway",
+    "how to integrate razorpay with invoicing"
   ],
   "failed": [],
   "full_report": [
     {
-      "keyword": "online payment collection for indian businesses",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "business.paytm.com",
-        "paytmpayments.com",
-        "unlimit.com",
-        "razorpay.com",
-        "payoneer.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "how to collect payments in retail business",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "lyra.com",
-        "stripe.com",
-        "nibusinessinfo.co.uk",
-        "adyen.com",
-        "pxp.io"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "best invoicing software for small business india",
-      "verdict": "MAYBE",
-      "score": 6,
-      "tier1_hits": [
-        "zoho.com",
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "zoho.com",
-        "accountune.com",
-        "mybillbook.in",
-        "raseedapp.com",
-        "linkedin.com"
-      ],
-      "reason": "Moderate competition (score=6). Tier 1 domains present: zoho.com, tallysolutions.com. Winnable with strong content."
-    },
-    {
-      "keyword": "online payment gateways for indian businesses",
+      "keyword": "razorpay payment link integration",
       "verdict": "PASS",
       "score": 0,
       "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
         "razorpay.com",
-        "payu.in",
-        "payoneer.com",
-        "paytmpayments.com",
-        "reddit.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "how to pay international invoices online in india",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "karboncard.com",
         "razorpay.com",
-        "worldline.com",
-        "skydo.com",
-        "flywire.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "recurring payments in india for global companies",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "payu.in",
-        "worldline.com",
-        "transactbridge.com",
-        "docs.stripe.com",
-        "business.paytm.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "accepting international payments in india",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
         "razorpay.com",
-        "reddit.com",
-        "docs.stripe.com",
-        "worldline.com",
-        "wise.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "gst compliant invoicing for indian businesses",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "zoho.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "ecosio.com",
-        "base.com",
-        "zoho.com",
-        "vasyerp.com",
-        "gimbooks.com"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "online invoice payment collection software",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "zoho.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "zoho.com",
-        "refrens.com",
-        "salesforce.com",
-        "squareup.com",
-        "mybillbook.in"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "how to select right payment solution for business",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "worldline.com",
         "razorpay.com",
-        "oropay.com",
-        "monext.com",
-        "salesforce.com"
+        "youtube.com"
       ],
       "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "best billing software for retail shops in india",
-      "verdict": "MAYBE",
-      "score": 4,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [
-        "techjockey.com"
-      ],
-      "top_5_domains": [
-        "mybillbook.in",
-        "tallysolutions.com",
-        "softhealer.com",
-        "vasyerp.com",
-        "reddit.com"
-      ],
-      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: techjockey.com. Winnable with strong content."
-    },
-    {
-      "keyword": "invoice management for modern businesses india",
-      "verdict": "MAYBE",
-      "score": 6,
-      "tier1_hits": [
-        "cleartax.in",
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "cleartax.in",
-        "refrens.com",
-        "vasyerp.com",
-        "tyasuite.com",
-        "business.amazon.com"
-      ],
-      "reason": "Moderate competition (score=6). Tier 1 domains present: cleartax.in, tallysolutions.com. Winnable with strong content."
-    },
-    {
-      "keyword": "payment collection and invoice management software",
-      "verdict": "PASS",
-      "score": 1,
-      "tier1_hits": [],
-      "tier2_hits": [
-        "g2.com"
-      ],
-      "top_5_domains": [
-        "billingplatform.com",
-        "salesforce.com",
-        "squareup.com",
-        "upflow.io",
-        "mybillbook.in"
-      ],
-      "reason": "Low authority presence (score=1). Winnable with quality content."
-    },
-    {
-      "keyword": "how to choose right invoicing software for business",
+      "keyword": "invoicing software with payment gateway",
       "verdict": "MAYBE",
       "score": 4,
       "tier1_hits": [
@@ -259,28 +61,202 @@
         "profitbooks.net"
       ],
       "top_5_domains": [
-        "stripe.com",
-        "mooninvoice.com",
-        "salesforce.com",
         "zoho.com",
-        "profitbooks.net"
+        "razorpay.com",
+        "salesforce.com",
+        "invoiceninja.com",
+        "invoicely.com"
       ],
       "reason": "Moderate competition (score=4). Tier 1 domains present: zoho.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
     },
     {
-      "keyword": "online payment systems for e-commerce businesses india",
+      "keyword": "razorpay payment links for invoices",
       "verdict": "PASS",
       "score": 0,
       "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
         "razorpay.com",
-        "payoneer.com",
-        "cashfree.com",
-        "payu.in",
-        "wise.com"
+        "razorpay.com",
+        "reddit.com",
+        "razorpay.com",
+        "razorpay.com"
       ],
       "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "how to integrate razorpay with invoicing",
+      "verdict": "MAYBE",
+      "score": 4,
+      "tier1_hits": [
+        "zoho.com"
+      ],
+      "tier2_hits": [
+        "profitbooks.net"
+      ],
+      "top_5_domains": [
+        "zohoflow.com",
+        "razorpay.com",
+        "razorpay.com",
+        "youtube.com",
+        "youtube.com"
+      ],
+      "reason": "Moderate competition (score=4). Tier 1 domains present: zoho.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
+    },
+    {
+      "keyword": "razorpay payment gateway for small business",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "razorpay.com",
+        "razorpay.com",
+        "razorpay.com",
+        "razorpay.com",
+        "facebook.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "create payment links with razorpay",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "razorpay.com",
+        "razorpay.com",
+        "youtube.com",
+        "youtube.com",
+        "reddit.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "razorpay invoice payment integration",
+      "verdict": "PASS",
+      "score": 1,
+      "tier1_hits": [],
+      "tier2_hits": [
+        "profitbooks.net"
+      ],
+      "top_5_domains": [
+        "razorpay.com",
+        "razorpay.com",
+        "razorpay.com",
+        "youtube.com",
+        "razorpay.com"
+      ],
+      "reason": "Low authority presence (score=1). Winnable with quality content."
+    },
+    {
+      "keyword": "payment link integration with invoicing",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "stripe.com",
+        "docs.oracle.com",
+        "tranzzo.com",
+        "help.sap.com",
+        "payrequest.io"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "razorpay payment solutions for msme",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "razorpay.com",
+        "razorpay.com",
+        "youtube.com",
+        "razorpay.com",
+        "razorpay.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "integrate razorpay with existing billing",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "razorpay.com",
+        "razorpay.com",
+        "razorpay.com",
+        "youtube.com",
+        "help.gohighlevel.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "razorpay payment link for recurring payments",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "razorpay.com",
+        "razorpay.com",
+        "razorpay.com",
+        "youtube.com",
+        "reddit.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "secure payment integration with razorpay",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "razorpay.com",
+        "razorpay.com",
+        "razorpay.com",
+        "sriggle.com",
+        "linkedin.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "razorpay payment links for business owners",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "razorpay.com",
+        "razorpay.com",
+        "razorpay.com",
+        "youtube.com",
+        "razorpay.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "invoicing apps with razorpay payment gateway",
+      "verdict": "PASS",
+      "score": 2,
+      "tier1_hits": [],
+      "tier2_hits": [
+        "profitbooks.net",
+        "getapp.com"
+      ],
+      "top_5_domains": [
+        "razorpay.com",
+        "profitbooks.net",
+        "razorpay.com",
+        "youtube.com",
+        "mooninvoice.com"
+      ],
+      "reason": "Low authority presence (score=2). Winnable with quality content."
     }
   ]
 }

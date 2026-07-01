@@ -6,6 +6,20 @@
   "lut_export_support": true,
   "recurring_invoice_profiles": true,
   "bulk_csv_upload": true,
-  "e_invoicing_generation": false,
-  "e_way_bill_generation": false
+  "e_invoicing_generation": true,
+  "e_way_bill_generation": true,
+  "multi_currency_billing": true,
+  "tds_tcs_management": true,
+  "pos_billing": true,
+  "proforma_invoicing": true,
+  "invoice_template_customization": true,
+  "real_time_payment_tracking": true,
+  "automatic_tax_calculations": true,
+  "expense_tracking": true,
+  "client_management": true,
+  "reports_and_analytics": true,
+  "branded_templates": true,
+  "mobile_app_access": true,
+  "cloud_backup": true,
+  "secure_data_storage": true
 }

@@ -505,6 +505,16 @@ with st.sidebar:
             st.rerun()
         else:
             st.error("Failed to trigger auditor workflow on GitHub Actions.")
+
+    if st.button("Run Feature Updater", width="stretch"):
+        st.info("Triggering remote Feature Updater...")
+        success = trigger_workflow_dispatch(PIPELINE_REPO, "feature-updater.yml", "main", None, GITHUB_TOKEN)
+        if success:
+            st.success("🎉 Feature Updater triggered successfully!")
+            time.sleep(2)
+            st.rerun()
+        else:
+            st.error("Failed to trigger Feature Updater workflow on GitHub Actions.")
         
     st.divider()
     st.caption("System Status: Online")
@@ -571,6 +581,7 @@ with tab_system:
             # Fetch runs
             pipeline_runs = get_workflow_runs(PIPELINE_REPO, "seo-pipeline.yml", GITHUB_TOKEN, limit=3)
             audit_runs = get_workflow_runs(PIPELINE_REPO, "seo-auditor.yml", GITHUB_TOKEN, limit=3)
+            updater_runs = get_workflow_runs(PIPELINE_REPO, "feature-updater.yml", GITHUB_TOKEN, limit=3)
             
             st.markdown("### 🤖 Pipeline Runs (`seo-pipeline.yml`)")
             if pipeline_runs:
@@ -618,6 +629,29 @@ with tab_system:
                                 st.rerun()
             else:
                 st.info("No audit runs found.")
+                
+            st.markdown("### ⚙️ Feature Updater Runs (`feature-updater.yml`)")
+            if updater_runs:
+                for run in updater_runs:
+                    run_num = run.get("run_number")
+                    status = run.get("status")
+                    conclusion = run.get("conclusion")
+                    run_id = run.get("id")
+                    created_at = run.get("created_at", "").replace("T", " ").replace("Z", "")
+                    
+                    with st.container(border=True):
+                        col_run_info, col_run_action = st.columns([5, 1])
+                        with col_run_info:
+                            st.markdown(f"**Feature Updater Run #{run_num}**")
+                            st.caption(f"Started: {created_at} UTC")
+                            st.markdown(render_gha_status(status, conclusion), unsafe_allow_html=True)
+                        with col_run_action:
+                            if st.button("View Logs", key=f"logs_btn_{run_id}"):
+                                st.session_state["show_logs_for_run"] = run_id
+                                st.session_state["show_logs_num"] = run_num
+                                st.rerun()
+            else:
+                st.info("No Feature Updater runs found.")
                 
             # Log Viewer Section
             if st.session_state["show_logs_for_run"]:
@@ -773,10 +807,13 @@ with tab_system:
                 # Find if any active GHA run is executing
                 pipeline_running = pipeline_runs and pipeline_runs[0].get("status") in ["in_progress", "queued"]
                 audit_running = audit_runs and audit_runs[0].get("status") in ["in_progress", "queued"]
+                updater_running = updater_runs and updater_runs[0].get("status") in ["in_progress", "queued"]
                 if pipeline_running:
                     st.info("⚡ Pipeline Running on GitHub")
                 elif audit_running:
                     st.info("🕵️ Auditor Running on GitHub")
+                elif updater_running:
+                    st.info("⚙️ Feature Updater Running on GitHub")
                 else:
                     st.success("🟢 Ready (All Workflows Idle)")
             else:
@@ -791,8 +828,9 @@ with tab_system:
     if is_cloud:
         pipeline_running = pipeline_runs and pipeline_runs[0].get("status") in ["in_progress", "queued"]
         audit_running = audit_runs and audit_runs[0].get("status") in ["in_progress", "queued"]
+        updater_running = updater_runs and updater_runs[0].get("status") in ["in_progress", "queued"]
         
-        if pipeline_running or audit_running:
+        if pipeline_running or audit_running or updater_running:
             st.info("🔄 Active run detected on GitHub. Dashboard is auto-refreshing in 6 seconds to stream live logs and update metrics...")
             time.sleep(6)
             st.rerun()

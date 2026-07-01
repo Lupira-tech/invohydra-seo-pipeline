@@ -1,0 +1,57 @@
+name: InvoHydra Feature Updater
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-feature-updater:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ── 1. Checkout the pipeline repo ──────────────────────────────────
+      - name: Checkout Pipeline Repo
+        uses: actions/checkout@v4
+
+      # ── 2. Set up Python 3.11 ──────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # ── 3. Install Python dependencies ─────────────────────────────────
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # ── 4. Create .env file from GitHub Secrets ────────────────────────
+      - name: Configure Environment Variables
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          echo "GROQ_API_KEY=${GROQ_API_KEY}" >> .env
+
+      # ── 5. Run the Feature Updater Agent ───────────────────────────────
+      - name: Run Feature Updater Agent
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python -u agents/feature_updater.py
+
+      # ── 6. Commit and Push Changes ─────────────────────────────────────
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/feature_truth.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: auto-update feature truth map [skip ci]"
+            git push
+          else
+            echo "No changes to feature truth map."
+          fi

@@ -26,7 +26,6 @@ from agents.planner import load_keywords, load_feature_truth, cluster_keywords
 from agents.writer import generate_all_blogs
 from agents.illustrator import illustrate_blogs
 from agents.publisher import publish_blogs
-from config import SEED_TOPICS
 
 # ──────────────────────────────────────────────────────────────────────────────
 # PIPELINE CONFIGURATION
@@ -38,6 +37,7 @@ FEATURES_PATH           = "data/feature_truth.json"
 CLUSTERS_OUTPUT_PATH    = "data/clustered_keywords.json"
 BLOGS_DIR               = "data/blogs"
 STATE_FILE_PATH         = "data/pipeline_state.json"
+SEED_TOPICS_PATH        = "data/seed_topics.json"
 
 # Set to True to skip Agent 1 and use manual_keywords.json instead
 USE_MANUAL_KEYWORDS = False
@@ -51,7 +51,7 @@ def get_rotating_topic(topics_pool: list) -> str:
     Advances to the next topic on every successful run.
     """
     if not topics_pool:
-        raise ValueError("SEED_TOPICS list in config.py is empty.")
+        raise ValueError("Seed topics list in data/seed_topics.json is empty.")
 
     os.makedirs("data", exist_ok=True)
     today = date.today()
@@ -224,7 +224,14 @@ def main():
         print(f"🎯  Manual Override: Using provided seed topic: \"{args.topic}\"")
         topics_to_run = [args.topic]
     else:
-        rotating_topic = get_rotating_topic(SEED_TOPICS)
+        try:
+            with open(SEED_TOPICS_PATH, "r", encoding="utf-8") as f:
+                seed_topics = json.load(f)
+        except Exception as e:
+            print(f"❌ Error loading seed topics from {SEED_TOPICS_PATH}: {e}")
+            return
+            
+        rotating_topic = get_rotating_topic(seed_topics)
         topics_to_run = [rotating_topic]
 
     # ── Phase 1: Keyword Discovery (Agent 1) ──────────────────────────────

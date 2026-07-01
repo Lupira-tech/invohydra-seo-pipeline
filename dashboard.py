@@ -444,6 +444,67 @@ def parse_audit_logs(log_path):
             state["details"] = f"🕵️ Active: Checking live Google positions... (Audited: {checked_count} of {tot_blogs})"
     return state
 
+# Log parsing utility for Feature Updater Run
+def parse_updater_logs(content):
+    state = {
+        "status": "pending",
+        "details": "Awaiting Feature Updater trigger...",
+        "changes": [],
+        "new_topics": []
+    }
+    if not content:
+        return state
+
+    if "Starting Feature Truth Auto-Updater" in content:
+        state["status"] = "running"
+        state["details"] = "Starting Feature Updater agent..."
+
+    # Check scraping
+    scraping_urls = re.findall(r"🔍 Scraping: ([^\n\r]+)", content)
+    if scraping_urls:
+        state["details"] = f"🔍 Scraping website pages (Last: {scraping_urls[-1]})..."
+
+    if "Analyzing features with Groq LLM" in content:
+        state["details"] = "🧠 Analyzing features with Groq LLM..."
+
+    if "Successfully updated" in content or "No changes detected in features" in content:
+        state["details"] = "✅ Features analyzed and updated."
+
+    # Parse changes
+    if "Changes detected:" in content:
+        changes_part = content.split("Changes detected:")[-1]
+        for line in changes_part.splitlines():
+            line = line.strip()
+            if line.startswith("- "):
+                state["changes"].append(line[2:])
+            elif line and not line.startswith("-") and "Checking for new seed topics" in line:
+                break
+
+    if "Checking for new seed topics" in content:
+        state["details"] = "🧠 Checking for new seed topics to generate..."
+
+    # Parse generated topics
+    if "Generated" in content and "NEW seed topics:" in content:
+        topics_part = content.split("NEW seed topics:")[-1]
+        for line in topics_part.splitlines():
+            line = line.strip()
+            if line.startswith("- "):
+                state["new_topics"].append(line[2:])
+            elif line and "Successfully appended" in line:
+                break
+
+    if "Successfully appended new topics" in content:
+        state["status"] = "completed"
+        state["details"] = f"✅ Success: Generated and appended {len(state['new_topics'])} new seed topics."
+    elif "No new seed topics needed" in content:
+        state["status"] = "completed"
+        state["details"] = "✅ Success: Feature map updated. No new seed topics needed."
+    elif "Groq API request failed" in content or "Failed to load" in content:
+        state["status"] = "failed"
+        state["details"] = "❌ Failed: Error encountered during execution."
+
+    return state
+
 # Helper to render status badge HTML
 def render_status(status):
     if status == "running":
@@ -582,6 +643,52 @@ with tab_system:
             pipeline_runs = get_workflow_runs(PIPELINE_REPO, "seo-pipeline.yml", GITHUB_TOKEN, limit=3)
             audit_runs = get_workflow_runs(PIPELINE_REPO, "seo-auditor.yml", GITHUB_TOKEN, limit=3)
             updater_runs = get_workflow_runs(PIPELINE_REPO, "feature-updater.yml", GITHUB_TOKEN, limit=3)
+
+            # Live Feature Updater Tracker (Always show latest run's parsed status/results)
+            if updater_runs:
+                latest_run = updater_runs[0]
+                latest_status = latest_run.get("status")
+                latest_conclusion = latest_run.get("conclusion")
+                latest_id = latest_run.get("id")
+                latest_num = latest_run.get("run_number")
+                
+                is_running = latest_status in ["in_progress", "queued"]
+                
+                with st.container(border=True):
+                    st.markdown(f"#### ⚙️ Feature Updater Live Status Tracker (Run #{latest_num})")
+                    
+                    # Fetch logs and parse them
+                    run_logs = ""
+                    if is_running or st.checkbox("Load run summary (Features & Seed Topics)", value=is_running, key=f"load_sum_{latest_id}"):
+                        run_logs = get_workflow_run_logs(PIPELINE_REPO, latest_id, GITHUB_TOKEN)
+                    
+                    parsed = parse_updater_logs(run_logs)
+                    
+                    col_stat, col_det = st.columns([1, 4])
+                    with col_stat:
+                        stat_val = "running" if is_running else ("completed" if latest_conclusion == "success" else ("failed" if latest_conclusion == "failure" else "pending"))
+                        st.markdown(render_status(stat_val), unsafe_allow_html=True)
+                    with col_det:
+                        if is_running and not run_logs:
+                            st.write("Initializing run... fetching logs.")
+                        else:
+                            st.write(parsed["details"])
+                    
+                    if parsed["changes"]:
+                        st.markdown("**Detected Feature Changes:**")
+                        for change in parsed["changes"]:
+                            st.write(f"- {change}")
+                            
+                    if parsed["new_topics"]:
+                        st.markdown("**Generated Seed Topics:**")
+                        for topic in parsed["new_topics"]:
+                            st.write(f"- `{topic}`")
+                            
+                    if is_running:
+                        st.caption("🔄 *Auto-refreshing to stream live agent updates...*")
+                    else:
+                        st.caption("✅ *Run finished.*")
+                st.write("") # Spacing
             
             st.markdown("### 🤖 Pipeline Runs (`seo-pipeline.yml`)")
             if pipeline_runs:

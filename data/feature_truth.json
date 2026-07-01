@@ -21,5 +21,18 @@
   "branded_templates": true,
   "mobile_app_access": true,
   "cloud_backup": true,
-  "secure_data_storage": true
+  "secure_data_storage": true,
+  "qr_code_generation": true,
+  "credit_debit_notes": true,
+  "recurring_expenses": true,
+  "active_session_control": true,
+  "advanced_filters": true,
+  "api_access": true,
+  "whatsapp_sharing": true,
+  "barcode_scanning": true,
+  "customer_loyalty_management": true,
+  "product_pricing_management": true,
+  "sales_analytics": true,
+  "inventory_management": true,
+  "multi_payment_methods": true
 }

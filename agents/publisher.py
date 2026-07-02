@@ -164,7 +164,7 @@ def create_blog_data_file(blog_data: dict) -> dict:
         "target_keyword": blog_data.get("target_keyword") or blog_data.get("url_slug", "untitled").replace("-", " "),
         "markdown_body": blog_data.get("markdown_body", ""),
         "image": blog_data.get("image", "/meeting.png"),
-        "author": "Akhil (Admin)",
+        "author": "InvoHydra",
         "authorAvatar": "https://i.pravatar.cc/30",
         "link": "#",
         "date": date.today().isoformat(),

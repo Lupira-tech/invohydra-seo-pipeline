@@ -146,7 +146,19 @@ def get_blogs_from_github(repo, path="src/app/blog/posts", branch="blog-automati
                                     pass
     except Exception as e:
         pass
-    return blogs
+def resolve_image_url(image_path, repo="InvoHydra/InvoHydra-Landing-Page", branch="blog-automation"):
+    if not image_path:
+        return None
+    if image_path.startswith("http://") or image_path.startswith("https://"):
+        return image_path
+    
+    clean_path = image_path.lstrip("/")
+    if clean_path.startswith("public/"):
+        rel_path = clean_path
+    else:
+        rel_path = f"public/{clean_path}"
+        
+    return f"https://raw.githubusercontent.com/{repo}/{branch}/{rel_path}"
 
 
 def trigger_workflow_dispatch(repo, workflow_id, ref="main", inputs=None, token=None):
@@ -1070,12 +1082,22 @@ with tab_library:
         st.markdown(f"📂 *Showing blogs published on the `{SAFE_BRANCH_NAME}` branch of `{WEBSITE_REPO}`*")
         if remote_blogs:
             for file, blog_data in remote_blogs:
-                title = blog_data.get("meta_title", "Untitled Document")
+                title = blog_data.get("title") or blog_data.get("meta_title", "Untitled Document")
+                img_path = blog_data.get("image")
+                img_url = resolve_image_url(img_path, WEBSITE_REPO, SAFE_BRANCH_NAME)
+                
                 with st.expander(f"📄 {title}"):
                     col_meta, col_content = st.columns([1, 2])
                     with col_meta:
+                        if img_url:
+                            try:
+                                st.image(img_url, caption="Header Cover Image", use_container_width=True)
+                            except Exception:
+                                pass
                         st.markdown("**Target Keyword**")
                         st.write(f"`{blog_data.get('target_keyword', 'N/A')}`")
+                        st.markdown("**Author**")
+                        st.write(f"{blog_data.get('author', 'InvoHydra')}")
                         st.markdown("**Meta Description**")
                         st.write(blog_data.get('meta_description', 'N/A'))
                         st.markdown("**Repository Filename**")
@@ -1091,12 +1113,22 @@ with tab_library:
             blog_files = [f for f in os.listdir(BLOGS_DIR) if f.endswith('.json')]
             for file in blog_files:
                 blog_data = load_json(os.path.join(BLOGS_DIR, file))
-                title = blog_data.get("meta_title", "Untitled Document")
-                with st.expander(f"{title}"):
+                title = blog_data.get("title") or blog_data.get("meta_title", "Untitled Document")
+                img_path = blog_data.get("image")
+                img_url = resolve_image_url(img_path, WEBSITE_REPO, SAFE_BRANCH_NAME)
+                
+                with st.expander(f"📄 {title}"):
                     col_meta, col_content = st.columns([1, 2])
                     with col_meta:
+                        if img_url:
+                            try:
+                                st.image(img_url, caption="Header Cover Image", use_container_width=True)
+                            except Exception:
+                                pass
                         st.markdown("**Target Keyword**")
                         st.write(f"`{blog_data.get('target_keyword', 'N/A')}`")
+                        st.markdown("**Author**")
+                        st.write(f"{blog_data.get('author', 'InvoHydra')}")
                         st.markdown("**Meta Description**")
                         st.write(blog_data.get('meta_description', 'N/A'))
                         st.markdown("**File System Reference**")

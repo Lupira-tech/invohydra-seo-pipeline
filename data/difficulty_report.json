@@ -1,262 +1,286 @@
 {
   "surviving_keywords": [
-    "razorpay payment link integration",
-    "razorpay payment links for invoices",
-    "razorpay payment gateway for small business",
-    "create payment links with razorpay",
-    "razorpay invoice payment integration",
-    "payment link integration with invoicing",
-    "razorpay payment solutions for msme",
-    "integrate razorpay with existing billing",
-    "razorpay payment link for recurring payments",
-    "secure payment integration with razorpay",
-    "razorpay payment links for business owners",
-    "invoicing apps with razorpay payment gateway",
-    "invoicing software with payment gateway",
-    "how to integrate razorpay with invoicing"
+    "simple accounting software for indian msme",
+    "cloud based accounting services for msme",
+    "how to choose accounting software for msme",
+    "best accounting software for msme in india",
+    "accounting software for indian startups",
+    "best accounting software for startups in india",
+    "free accounting and billing software for msme",
+    "simple accounting software for small business",
+    "accounting software for startups india",
+    "simple small business accounting software free",
+    "simple accounting software for freelancers"
   ],
   "passed": [
-    "razorpay payment link integration",
-    "razorpay payment links for invoices",
-    "razorpay payment gateway for small business",
-    "create payment links with razorpay",
-    "razorpay invoice payment integration",
-    "payment link integration with invoicing",
-    "razorpay payment solutions for msme",
-    "integrate razorpay with existing billing",
-    "razorpay payment link for recurring payments",
-    "secure payment integration with razorpay",
-    "razorpay payment links for business owners",
-    "invoicing apps with razorpay payment gateway"
+    "simple accounting software for indian msme",
+    "cloud based accounting services for msme",
+    "how to choose accounting software for msme",
+    "best accounting software for msme in india",
+    "accounting software for indian startups"
   ],
   "maybe": [
-    "invoicing software with payment gateway",
-    "how to integrate razorpay with invoicing"
+    "best accounting software for startups in india",
+    "free accounting and billing software for msme",
+    "simple accounting software for small business",
+    "accounting software for startups india",
+    "simple small business accounting software free",
+    "simple accounting software for freelancers"
   ],
-  "failed": [],
+  "failed": [
+    "best online accounting software for small business india",
+    "gst compliant accounting software for msme",
+    "cloud based accounting software for startups"
+  ],
   "full_report": [
     {
-      "keyword": "razorpay payment link integration",
+      "keyword": "simple accounting software for indian msme",
       "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
+      "score": 3,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
       "tier2_hits": [],
       "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "youtube.com"
+        "mybillbook.in",
+        "mykhataexpert.com",
+        "tutorial.gst.gov.in",
+        "themunim.com",
+        "elitemindz.co"
       ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+      "reason": "Low authority presence (score=3). Winnable with quality content."
     },
     {
-      "keyword": "invoicing software with payment gateway",
+      "keyword": "best accounting software for startups in india",
       "verdict": "MAYBE",
-      "score": 4,
+      "score": 6,
       "tier1_hits": [
+        "tallysolutions.com",
         "zoho.com"
       ],
-      "tier2_hits": [
-        "profitbooks.net"
-      ],
+      "tier2_hits": [],
       "top_5_domains": [
+        "giddh.com",
+        "tallysolutions.com",
+        "kruzeconsulting.com",
+        "taxone.vyapar.com",
+        "flickai.in"
+      ],
+      "reason": "Moderate competition (score=6). Tier 1 domains present: tallysolutions.com, zoho.com. Winnable with strong content."
+    },
+    {
+      "keyword": "cloud based accounting services for msme",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "forbes.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "link4solution.com",
+        "eisneramper.com",
+        "realbooks.in",
+        "chapter1.finance",
+        "bentleys.com.au"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "free accounting and billing software for msme",
+      "verdict": "MAYBE",
+      "score": 6,
+      "tier1_hits": [
         "zoho.com",
-        "razorpay.com",
-        "salesforce.com",
-        "invoiceninja.com",
-        "invoicely.com"
+        "tallysolutions.com"
       ],
-      "reason": "Moderate competition (score=4). Tier 1 domains present: zoho.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
+      "tier2_hits": [],
+      "top_5_domains": [
+        "tutorial.gst.gov.in",
+        "gstn.org.in",
+        "youtube.com",
+        "gogstbill.com",
+        "billingsoftwareindia.in"
+      ],
+      "reason": "Moderate competition (score=6). Tier 1 domains present: zoho.com, tallysolutions.com. Winnable with strong content."
     },
     {
-      "keyword": "razorpay payment links for invoices",
+      "keyword": "how to choose accounting software for msme",
       "verdict": "PASS",
       "score": 0,
       "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "reddit.com",
-        "razorpay.com",
-        "razorpay.com"
+        "mybillbook.in",
+        "mykhataexpert.com",
+        "tutorial.gst.gov.in",
+        "masllp.com",
+        "themunim.com"
       ],
       "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "how to integrate razorpay with invoicing",
+      "keyword": "simple accounting software for small business",
+      "verdict": "MAYBE",
+      "score": 6,
+      "tier1_hits": [
+        "quickbooks.intuit.com",
+        "investopedia.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "quickbooks.intuit.com",
+        "xero.com",
+        "youtube.com",
+        "aiaccountant.com",
+        "play.google.com"
+      ],
+      "reason": "Moderate competition (score=6). Tier 1 domains present: quickbooks.intuit.com, investopedia.com. Winnable with strong content."
+    },
+    {
+      "keyword": "best online accounting software for small business india",
+      "verdict": "FAIL",
+      "score": 9,
+      "tier1_hits": [
+        "tallysolutions.com",
+        "quickbooks.intuit.com",
+        "zoho.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "tallysolutions.com",
+        "quickbooks.intuit.com",
+        "youtube.com",
+        "mybillbook.in",
+        "ebizfiling.com"
+      ],
+      "reason": "Too competitive (score=9). Tier 1 giants: tallysolutions.com, quickbooks.intuit.com, zoho.com. Unlikely to rank page 1."
+    },
+    {
+      "keyword": "accounting software for startups india",
+      "verdict": "MAYBE",
+      "score": 6,
+      "tier1_hits": [
+        "tallysolutions.com",
+        "zoho.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "tallysolutions.com",
+        "giddh.com",
+        "zoho.com",
+        "taxone.vyapar.com",
+        "aiaccountant.com"
+      ],
+      "reason": "Moderate competition (score=6). Tier 1 domains present: tallysolutions.com, zoho.com. Winnable with strong content."
+    },
+    {
+      "keyword": "gst compliant accounting software for msme",
+      "verdict": "FAIL",
+      "score": 9,
+      "tier1_hits": [
+        "zoho.com",
+        "cleartax.in",
+        "tallysolutions.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "tutorial.gst.gov.in",
+        "gstn.org.in",
+        "zoho.com",
+        "cleartax.in",
+        "bigsunworld.com"
+      ],
+      "reason": "Too competitive (score=9). Tier 1 giants: zoho.com, cleartax.in, tallysolutions.com. Unlikely to rank page 1."
+    },
+    {
+      "keyword": "simple small business accounting software free",
       "verdict": "MAYBE",
       "score": 4,
       "tier1_hits": [
-        "zoho.com"
+        "quickbooks.intuit.com"
       ],
       "tier2_hits": [
         "profitbooks.net"
       ],
       "top_5_domains": [
-        "zohoflow.com",
-        "razorpay.com",
-        "razorpay.com",
-        "youtube.com",
-        "youtube.com"
+        "akaunting.com",
+        "waveapps.com",
+        "technologyadvice.com",
+        "quickbooks.intuit.com",
+        "play.google.com"
       ],
-      "reason": "Moderate competition (score=4). Tier 1 domains present: zoho.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
+      "reason": "Moderate competition (score=4). Tier 1 domains present: quickbooks.intuit.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
     },
     {
-      "keyword": "razorpay payment gateway for small business",
+      "keyword": "best accounting software for msme in india",
       "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
+      "score": 3,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
       "tier2_hits": [],
       "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "facebook.com"
+        "webledger.in",
+        "mykhataexpert.com",
+        "mybillbook.in",
+        "digitaldocsys.in",
+        "tallysolutions.com"
       ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+      "reason": "Low authority presence (score=3). Winnable with quality content."
     },
     {
-      "keyword": "create payment links with razorpay",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
+      "keyword": "cloud based accounting software for startups",
+      "verdict": "FAIL",
+      "score": 9,
+      "tier1_hits": [
+        "tallysolutions.com",
+        "forbes.com",
+        "quickbooks.intuit.com"
+      ],
       "tier2_hits": [],
       "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "youtube.com",
-        "youtube.com",
-        "reddit.com"
+        "tallysolutions.com",
+        "waveapps.com",
+        "forbes.com",
+        "giddh.com",
+        "netsuite.com"
       ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+      "reason": "Too competitive (score=9). Tier 1 giants: tallysolutions.com, forbes.com, quickbooks.intuit.com. Unlikely to rank page 1."
     },
     {
-      "keyword": "razorpay invoice payment integration",
+      "keyword": "accounting software for indian startups",
       "verdict": "PASS",
-      "score": 1,
-      "tier1_hits": [],
-      "tier2_hits": [
-        "profitbooks.net"
+      "score": 3,
+      "tier1_hits": [
+        "tallysolutions.com"
       ],
-      "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "youtube.com",
-        "razorpay.com"
-      ],
-      "reason": "Low authority presence (score=1). Winnable with quality content."
-    },
-    {
-      "keyword": "payment link integration with invoicing",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
-        "stripe.com",
-        "docs.oracle.com",
-        "tranzzo.com",
-        "help.sap.com",
-        "payrequest.io"
+        "tallysolutions.com",
+        "giddh.com",
+        "flickai.in",
+        "chapter1.finance",
+        "startupkhata.com"
       ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+      "reason": "Low authority presence (score=3). Winnable with quality content."
     },
     {
-      "keyword": "razorpay payment solutions for msme",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
+      "keyword": "simple accounting software for freelancers",
+      "verdict": "MAYBE",
+      "score": 6,
+      "tier1_hits": [
+        "quickbooks.intuit.com",
+        "nerdwallet.com"
+      ],
       "tier2_hits": [],
       "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "youtube.com",
-        "razorpay.com",
-        "razorpay.com"
+        "quickbooks.intuit.com",
+        "nerdwallet.com",
+        "uschamber.com",
+        "reddit.com",
+        "technologyadvice.com"
       ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "integrate razorpay with existing billing",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "youtube.com",
-        "help.gohighlevel.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "razorpay payment link for recurring payments",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "youtube.com",
-        "reddit.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "secure payment integration with razorpay",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "sriggle.com",
-        "linkedin.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "razorpay payment links for business owners",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "razorpay.com",
-        "razorpay.com",
-        "razorpay.com",
-        "youtube.com",
-        "razorpay.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "invoicing apps with razorpay payment gateway",
-      "verdict": "PASS",
-      "score": 2,
-      "tier1_hits": [],
-      "tier2_hits": [
-        "profitbooks.net",
-        "getapp.com"
-      ],
-      "top_5_domains": [
-        "razorpay.com",
-        "profitbooks.net",
-        "razorpay.com",
-        "youtube.com",
-        "mooninvoice.com"
-      ],
-      "reason": "Low authority presence (score=2). Winnable with quality content."
+      "reason": "Moderate competition (score=6). Tier 1 domains present: quickbooks.intuit.com, nerdwallet.com. Winnable with strong content."
     }
   ]
 }

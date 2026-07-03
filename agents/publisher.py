@@ -7,7 +7,7 @@ Works both locally and in GitHub Actions CI/CD.
 
 Flow:
 1. Clones the Landing Page repo (using PAT for auth in CI).
-2. Creates/checks out the 'blog-automation' branch.
+2. Creates/checks out the target publish branch (defaults to 'main').
 3. Converts AI JSON blogs into structured blog data JSON files.
 4. Commits and pushes changes.
 5. Creates a Pull Request via GitHub API.
@@ -35,7 +35,7 @@ LOCAL_BLOGS_DIR = os.path.join(_project_root, "data", "blogs")
 # ──────────────────────────────────────────────────────────────────────────────
 WEBSITE_REPO = os.getenv("WEBSITE_REPO", "InvoHydra/InvoHydra-Landing-Page")
 WEBSITE_REPO_PAT = os.getenv("WEBSITE_REPO_PAT", "")
-SAFE_BRANCH_NAME = os.getenv("PUBLISH_BRANCH", "blog-automation")
+SAFE_BRANCH_NAME = os.getenv("PUBLISH_BRANCH", "main")
 TARGET_BLOG_DIR = "src/app/blog/posts"  # Where blog JSON data lands in the website repo
 
 # For local development fallback
@@ -251,7 +251,7 @@ def publish_blogs() -> None:
             print(f"   Set LANDING_PAGE_REPO env var or update LOCAL_LANDING_PAGE_REPO in this file.")
             return
 
-    # 3. Create/checkout the blog-automation branch
+    # 3. Create/checkout the target publish branch (e.g. main)
     print(f"\n🌿 Checking out branch: '{SAFE_BRANCH_NAME}'...")
 
     if IS_CI:
@@ -359,9 +359,10 @@ def publish_blogs() -> None:
                 cwd=repo_dir
             )
             if push_result.returncode == 0:
-                print(f"🎉 Pushed {published_count} blogs to '{SAFE_BRANCH_NAME}' branch!")
-                # Create a PR from blog-automation → main on the website repo
-                create_pull_request(WEBSITE_REPO, SAFE_BRANCH_NAME)
+                print(f"🎉 Pushed {published_count} blogs directly to '{SAFE_BRANCH_NAME}' branch!")
+                if SAFE_BRANCH_NAME != "main":
+                    # Create a PR from feature branch → main on the website repo
+                    create_pull_request(WEBSITE_REPO, SAFE_BRANCH_NAME)
             else:
                 print(f"🛑 Push failed: {push_result.stderr}")
         else:

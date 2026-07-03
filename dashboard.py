@@ -53,7 +53,7 @@ if not check_password():
 WEBSITE_REPO = "InvoHydra/InvoHydra-Landing-Page"
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "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")
 PIPELINE_REPO = "jessejaison-cm/invohydra-seo-pipeline"
-SAFE_BRANCH_NAME = "blog-automation"
+SAFE_BRANCH_NAME = os.getenv("PUBLISH_BRANCH", "main")
 
 if "pipeline_proc" not in st.session_state:
     st.session_state["pipeline_proc"] = None
@@ -118,7 +118,7 @@ def load_json_from_github(repo, path, branch="main", token=None):
         pass
     return {}
 
-def get_blogs_from_github(repo, path="src/app/blog/posts", branch="blog-automation", token=None):
+def get_blogs_from_github(repo, path="src/app/blog/posts", branch="main", token=None):
     url = f"https://api.github.com/repos/{repo}/contents/{path}?ref={branch}&t={int(time.time())}"
     headers = {
         "Accept": "application/vnd.github.v3+json",
@@ -148,7 +148,7 @@ def get_blogs_from_github(repo, path="src/app/blog/posts", branch="blog-automati
         pass
     return blogs
 
-def fetch_github_image(image_path, repo="InvoHydra/InvoHydra-Landing-Page", branch="blog-automation", token=None):
+def fetch_github_image(image_path, repo="InvoHydra/InvoHydra-Landing-Page", branch="main", token=None):
     if not image_path:
         return None
     if image_path.startswith("http://") or image_path.startswith("https://"):
@@ -674,8 +674,8 @@ if is_cloud:
     audit = load_json_from_github(PIPELINE_REPO, "data/audit_report.json", "main", GITHUB_TOKEN)
     state = load_json_from_github(PIPELINE_REPO, "data/pipeline_state.json", "main", GITHUB_TOKEN)
     
-    # 2. Fetch published blogs from website repo blog-automation branch
-    remote_blogs = get_blogs_from_github(WEBSITE_REPO, "src/app/blog/posts", "blog-automation", GITHUB_TOKEN) or []
+    # 2. Fetch published blogs from website repo target branch
+    remote_blogs = get_blogs_from_github(WEBSITE_REPO, "src/app/blog/posts", SAFE_BRANCH_NAME, GITHUB_TOKEN) or []
     total_blogs = len(remote_blogs)
 else:
     # Local Mode: load from local files

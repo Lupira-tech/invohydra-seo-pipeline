@@ -86,7 +86,7 @@ jobs:
           CI: 'true'
           WEBSITE_REPO: 'InvoHydra/InvoHydra-Landing-Page'
           WEBSITE_REPO_PAT: ${{ secrets.WEBSITE_REPO_PAT }}
-          PUBLISH_BRANCH: 'blog-automation'
+          PUBLISH_BRANCH: 'main'
           PYTHONUNBUFFERED: '1'
         run: |
           TOPIC="${{ github.event.inputs.topic }}"

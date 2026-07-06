@@ -46,7 +46,7 @@ def fetch_unsplash_image(blog_title: str, target_keyword: str) -> bytes:
         print("⚠️ UNSPLASH_API_KEY is missing. Cannot fetch from Unsplash.")
         return b""
         
-    themes = ["office", "workspace", "money", "business building", "corporate finance", "accounting", "skyscraper"]
+    themes = ["office", "workspace", "money", "corporate finance", "accounting", "laptop", "teamwork"]
     selected_theme = random.choice(themes)
     
     # Try search query combining target keyword and selected theme

@@ -46,11 +46,30 @@ def fetch_unsplash_image(blog_title: str, target_keyword: str) -> bytes:
         print("⚠️ UNSPLASH_API_KEY is missing. Cannot fetch from Unsplash.")
         return b""
         
-    themes = ["office", "workspace", "money", "corporate finance", "accounting", "laptop", "teamwork"]
-    selected_theme = random.choice(themes)
+    global client
     
-    # Try search query combining target keyword and selected theme
-    search_query = f"{target_keyword} {selected_theme}"
+    # Use Gemini to generate a highly specific, relevant 1-3 word search query
+    if client:
+        try:
+            prompt = (
+                f"You are a professional photo editor for a B2B SaaS blog. "
+                f"The blog is titled '{blog_title}' and the main SEO keyword is '{target_keyword}'. "
+                f"Generate exactly ONE highly-relevant, 1-3 word noun phrase to search on Unsplash (a stock photo site) "
+                f"to find the perfect header image. "
+                f"Return ONLY the search phrase, nothing else. Do not use quotes or punctuation."
+            )
+            response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt,
+            )
+            search_query = response.text.strip().replace('"', '').replace("'", "")
+        except Exception as e:
+            print(f"⚠️ Gemini Unsplash query failed ({e}), falling back to basic themes.")
+            themes = ["office", "workspace", "money", "corporate finance", "accounting", "laptop", "teamwork"]
+            search_query = f"{target_keyword} {random.choice(themes)}"
+    else:
+        themes = ["office", "workspace", "money", "corporate finance", "accounting", "laptop", "teamwork"]
+        search_query = f"{target_keyword} {random.choice(themes)}"
     
     url = "https://api.unsplash.com/search/photos"
     headers = {
@@ -71,9 +90,9 @@ def fetch_unsplash_image(blog_title: str, target_keyword: str) -> bytes:
         
         results = data.get("results", [])
         if not results:
-            # Fallback: search just the theme itself
-            print(f"⚠️ No results for '{search_query}'. Trying fallback: '{selected_theme}'...")
-            params["query"] = selected_theme
+            # Fallback: search just the target_keyword
+            print(f"⚠️ No results for '{search_query}'. Trying fallback: '{target_keyword}'...")
+            params["query"] = target_keyword
             response = requests.get(url, headers=headers, params=params, timeout=30)
             response.raise_for_status()
             data = response.json()

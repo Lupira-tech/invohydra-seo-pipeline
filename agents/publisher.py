@@ -161,7 +161,7 @@ def create_blog_data_file(blog_data: dict) -> dict:
 
     # Inject invisible view tracker if not already present
     if "<!-- view_tracker -->" not in clean_body:
-        tracker_html = f'\n\n<!-- view_tracker -->\n<img src="https://hits.sh/invohydra.com/blog/{slug}.svg" width="0" height="0" style="display:none;" alt="views" />'
+        tracker_html = f'\n\n<!-- view_tracker -->\n<img src="https://hits.sh/invohydra.com/blog/{slug}.svg" width="1" height="1" style="opacity:0.01; position:absolute; top:0;" alt="" />'
         clean_body += tracker_html
 
     return {

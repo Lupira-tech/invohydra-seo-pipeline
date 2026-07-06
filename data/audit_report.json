@@ -1,107 +1,34 @@
 {
-  "top_10": [
-    {
-      "keyword": "Confused About Invoices? Here's How Invoicing Software for Small Businesses Helps",
-      "filename": "confused-about-invoices.json",
-      "rank": 7,
-      "url": "https://www.invohydra.com/blog"
-    }
-  ],
+  "top_10": [],
   "page_2_refresh": [],
   "not_found_or_deep": [
     {
-      "keyword": "gst compliant invoicing software for small businesses",
-      "filename": "gst-compliant-invoicing-software-for-small-businesses.json",
+      "keyword": "confused about invoices",
+      "filename": "confused-about-invoices.json",
       "rank": -1,
       "url": null
     },
     {
-      "keyword": "invoicing software for small businesses in india",
-      "filename": "invoicing-software-for-small-businesses-in-india.json",
+      "keyword": "gst compliant inventory management",
+      "filename": "gst-compliant-inventory-management.json",
       "rank": -1,
       "url": null
     },
     {
-      "keyword": "recurring billing for saas",
-      "filename": "recurring-billing-for-saas.json",
+      "keyword": "inventory management software for small businesses in india",
+      "filename": "inventory-management-software-for-small-businesses-in-india.json",
       "rank": -1,
       "url": null
     },
     {
-      "keyword": "Multi Currency Invoicing for Export Businesses",
-      "filename": "multi-currency-invoicing-for-export-businesses.json",
+      "keyword": "small business accounting and bookkeeping tips",
+      "filename": "small-business-accounting-and-bookkeeping-tips.json",
       "rank": -1,
       "url": null
     },
     {
-      "keyword": "accounting software for msme startups",
-      "filename": "accounting-software-for-msme-startups.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "AI Billing Software",
-      "filename": "ai-billing-software-for-business.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "online payment collection invoicing for indian businesses",
-      "filename": "online-payment-collection-invoicing-for-indian-businesses.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "Global Billing and Invoicing Solutions",
-      "filename": "global-billing-and-invoicing-solutions.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "simple accounting software for small businesses",
-      "filename": "simple-accounting-software-for-small-businesses.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "Recurring Billing Best Practices and Setup",
-      "filename": "recurring-billing-best-practices.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "freelance invoicing best practices",
-      "filename": "freelance-invoicing-best-practices.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "AI Invoicing Software for Professionals",
-      "filename": "ai-invoicing-for-professionals.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "streamlining retail payments",
-      "filename": "streamlining-retail-payments.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "razorpay payment integration benefits",
-      "filename": "razorpay-payment-integration-benefits.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "saas subscription management solutions",
-      "filename": "saas-subscription-management-solutions.json",
-      "rank": -1,
-      "url": null
-    },
-    {
-      "keyword": "Recurring Invoicing and Billing Automation",
-      "filename": "recurring-invoicing-and-billing-automation.json",
+      "keyword": "small business expense management india",
+      "filename": "small-business-expense-management-india.json",
       "rank": -1,
       "url": null
     }

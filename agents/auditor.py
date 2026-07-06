@@ -12,6 +12,7 @@ import os
 import sys
 import json
 import time
+import shutil
 import requests
 from typing import Dict, Any
 
@@ -25,6 +26,13 @@ load_dotenv(os.path.join(_project_root, ".env"))
 TARGET_DOMAIN = "invohydra.com"
 BLOGS_DIR = os.path.join(_project_root, "data", "blogs")
 REPORT_PATH = os.path.join(_project_root, "data", "audit_report.json")
+
+LOCAL_LANDING_PAGE_REPO = os.getenv(
+    "LANDING_PAGE_REPO",
+    r"C:\Repo\InvoHydra-Landing-Page"
+)
+IS_CI = os.getenv("CI", "false").lower() == "true"
+
 
 def check_rank(keyword: str) -> Dict[str, Any]:
     """
@@ -66,10 +74,33 @@ def check_rank(keyword: str) -> Dict[str, Any]:
         return {"rank": -1, "url": None}
 
 def run_auditor():
-    print("\n" + "═"*60)
+    print("\n" + "="*60)
     print("  🕵️  AGENT 6: PERFORMANCE AUDITOR")
-    print("═"*60)
+    print("="*60)
     
+    # If running locally, sync blogs from the landing page repo to BLOGS_DIR
+    if not IS_CI:
+        local_posts_dir = os.path.join(LOCAL_LANDING_PAGE_REPO, "src", "app", "blog", "posts")
+        if os.path.exists(local_posts_dir):
+            print(f"🔄 Syncing blogs from local landing page repo: {local_posts_dir}")
+            os.makedirs(BLOGS_DIR, exist_ok=True)
+            # Remove existing json files in BLOGS_DIR first to prevent stale files
+            for f in os.listdir(BLOGS_DIR):
+                if f.endswith('.json'):
+                    try:
+                        os.remove(os.path.join(BLOGS_DIR, f))
+                    except Exception as e:
+                        print(f"⚠️ Failed to remove stale local file {f}: {e}")
+            # Copy new ones
+            copied_count = 0
+            for f in os.listdir(local_posts_dir):
+                if f.endswith('.json'):
+                    shutil.copy2(os.path.join(local_posts_dir, f), os.path.join(BLOGS_DIR, f))
+                    copied_count += 1
+            print(f"✅ Sync complete. Copied {copied_count} blog files to {BLOGS_DIR}.\n")
+        else:
+            print(f"⚠️ Local landing page posts directory not found: {local_posts_dir}")
+
     if not os.path.exists(BLOGS_DIR):
         print(f"⚠️ No blogs found in {BLOGS_DIR}. Have you run the pipeline yet?")
         return
@@ -148,9 +179,9 @@ def run_auditor():
     with open(REPORT_PATH, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
 
-    print("\n" + "═"*60)
+    print("\n" + "="*60)
     print("  📊  AUDIT COMPLETE")
-    print("═"*60)
+    print("="*60)
     print(f"  🏆 Top 10 (Page 1): {len(report['top_10'])}")
     print(f"  🔄 Needs Refresh (Page 2): {len(report['page_2_refresh'])}")
     print(f"  👻 Not Found/Deep: {len(report['not_found_or_deep'])}")

@@ -630,8 +630,7 @@ with st.sidebar:
     st.title("InvoHydra SEO")
     st.markdown("Enterprise SEO Pipeline Control")
     st.divider()
-    
-    is_cloud = True
+    is_cloud = st.checkbox("Cloud Mode (GitHub Sync)", value=True, help="Switch between remote GitHub data and local workspace data.")
     
     with st.expander("⚙️ Pipeline Options", expanded=False):
         topic_override = st.text_input("Topic Override (Optional)", placeholder="e.g., Enterprise SEO")

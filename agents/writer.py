@@ -293,7 +293,7 @@ def generate_blog_post(cluster: Dict[str, Any], existing_titles: List[str] = Non
     final_slug = metadata.get("url_slug", "")
     
     # Inject invisible view tracker
-    tracker_html = f'\n\n<!-- view_tracker -->\n<img src="https://hits.sh/invohydra.com/blog/{final_slug}.svg" width="0" height="0" style="display:none;" alt="views" />'
+    tracker_html = f'\n\n<!-- view_tracker -->\n<img src="https://hits.sh/invohydra.com/blog/{final_slug}.svg" width="1" height="1" style="opacity:0.01; position:absolute; top:0;" alt="" />'
     markdown_body += tracker_html
     
     return {

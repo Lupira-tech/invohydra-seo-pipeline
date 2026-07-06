@@ -94,7 +94,7 @@ def get_workflow_run_logs(repo, run_id, token=None):
         return f"Failed to retrieve workflow logs: {e}"
     return "Logs could not be fetched (possibly expired or rate limited)."
 
-@st.cache_data(ttl=600)
+@st.cache_data(ttl=60)
 def fetch_blog_views(slug):
     """Fetches real-time view counts from hits.sh SVG badge."""
     if not slug:

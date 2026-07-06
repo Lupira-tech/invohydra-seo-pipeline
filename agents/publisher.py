@@ -157,14 +157,20 @@ def create_blog_data_file(blog_data: dict) -> dict:
     final_desc = blog_data.get("meta_description") or blog_data.get("excerpt") or ""
     raw_body = blog_data.get("markdown_body", "")
     clean_body = re.sub(r'!\[.*?\]\(.*?\)\s*', '', raw_body).strip()
+    slug = blog_data.get("url_slug", "untitled")
+
+    # Inject invisible view tracker if not already present
+    if "<!-- view_tracker -->" not in clean_body:
+        tracker_html = f'\n\n<!-- view_tracker -->\n<img src="https://hits.sh/invohydra.com/blog/{slug}.svg" width="0" height="0" style="display:none;" alt="views" />'
+        clean_body += tracker_html
 
     return {
         "title": final_title,
         "meta_title": final_title,
         "meta_description": final_desc,
         "excerpt": final_desc,
-        "url_slug": blog_data.get("url_slug", "untitled"),
-        "target_keyword": blog_data.get("target_keyword") or blog_data.get("url_slug", "untitled").replace("-", " "),
+        "url_slug": slug,
+        "target_keyword": blog_data.get("target_keyword") or slug.replace("-", " "),
         "markdown_body": clean_body,
         "image": blog_data.get("image", "/meeting.png"),
         "author": "InvoHydra",

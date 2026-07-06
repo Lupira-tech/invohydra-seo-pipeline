@@ -94,6 +94,23 @@ def get_workflow_run_logs(repo, run_id, token=None):
         return f"Failed to retrieve workflow logs: {e}"
     return "Logs could not be fetched (possibly expired or rate limited)."
 
+@st.cache_data(ttl=600)
+def fetch_blog_views(slug):
+    """Fetches real-time view counts from hits.sh SVG badge."""
+    if not slug:
+        return 0
+    url = f"https://hits.sh/invohydra.com/blog/{slug}.svg"
+    try:
+        headers = {"User-Agent": "Mozilla/5.0"}
+        res = requests.get(url, headers=headers, timeout=5)
+        if res.status_code == 200:
+            match = re.search(r'aria-label="hits:\s*([\d,]+)"', res.text)
+            if match:
+                return int(match.group(1).replace(",", ""))
+    except Exception:
+        pass
+    return 0
+
 # Helper functions for GitHub REST API Integration
 def load_json_from_github(repo, path, branch="main", token=None):
     # Bypass GitHub API and CDN caching by appending a unique timestamp query parameter
@@ -1117,6 +1134,10 @@ with tab_library:
                                 st.image(img_data, caption="Header Cover Image", use_container_width=True)
                             except Exception:
                                 pass
+                        views = fetch_blog_views(blog_data.get('url_slug', ''))
+                        if views > 0:
+                            st.metric("👁️ Live Views", views)
+                            
                         st.markdown("**Target Keyword**")
                         st.write(f"`{blog_data.get('target_keyword', 'N/A')}`")
                         st.markdown("**Author**")
@@ -1149,6 +1170,10 @@ with tab_library:
                                 st.image(img_data, caption="Header Cover Image", use_container_width=True)
                             except Exception:
                                 pass
+                        views = fetch_blog_views(blog_data.get('url_slug', ''))
+                        if views > 0:
+                            st.metric("👁️ Live Views", views)
+                            
                         st.markdown("**Target Keyword**")
                         st.write(f"`{blog_data.get('target_keyword', 'N/A')}`")
                         st.markdown("**Author**")

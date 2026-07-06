@@ -78,6 +78,30 @@ class BlogViewerHandler(SimpleHTTPRequestHandler):
                 self.send_error(404, "Blog post not found")
             return
 
+        # Route to serve generated local images stored in data/blogs/
+        elif self.path.startswith("/blog-images/"):
+            filename = urllib.parse.unquote(self.path[13:])
+            filepath = os.path.join(BLOGS_DIR, filename)
+            
+            if os.path.exists(filepath):
+                self.send_response(200)
+                if filename.endswith(".jpg") or filename.endswith(".jpeg"):
+                    self.send_header("Content-Type", "image/jpeg")
+                elif filename.endswith(".png"):
+                    self.send_header("Content-Type", "image/png")
+                else:
+                    self.send_header("Content-Type", "application/octet-stream")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                try:
+                    with open(filepath, "rb") as f:
+                        self.wfile.write(f.read())
+                except Exception as e:
+                    self.send_error(500, f"Error reading image: {e}")
+            else:
+                self.send_error(404, "Image not found")
+            return
+
         # Default handler to serve static dashboard files (like index.html)
         else:
             super().do_GET()

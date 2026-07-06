@@ -417,7 +417,37 @@
           const blogData = await response.json();
           markdownText = blogData.markdown_body || "";
           
+          let headerImageHtml = '';
+          if (blogData.image) {
+             headerImageHtml = `
+              <div style="margin-bottom: 24px; border-radius: 12px; overflow: hidden; border: 1px solid var(--panel-border);">
+                <img src="${blogData.image}" style="width: 100%; height: auto; display: block;" alt="Header Image">
+              </div>
+             `;
+          }
+
+          let authorHtml = '';
+          if (blogData.authorAvatar) {
+             authorHtml = `
+              <div class="meta-field" style="flex-direction: row; align-items: center; gap: 10px; margin-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+                <img src="${blogData.authorAvatar}" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--panel-border);">
+                <div style="display: flex; flex-direction: column;">
+                  <span class="meta-label">Author</span>
+                  <span class="meta-value" style="font-size: 0.9rem;">${blogData.author || 'Author'}</span>
+                </div>
+              </div>
+             `;
+          } else if (blogData.author) {
+             authorHtml = `
+              <div class="meta-field" style="margin-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+                <span class="meta-label">Author</span>
+                <span class="meta-value">${blogData.author}</span>
+              </div>
+             `;
+          }
+
           metaHtml = `
+            ${headerImageHtml}
             <div class="meta-card">
               <div class="meta-card-title">SEO Publishing Metadata</div>
               <div class="meta-field">
@@ -432,6 +462,7 @@
                 <span class="meta-label">URL Slug</span>
                 <span class="url-slug-badge">/${blogData.url_slug || ''}</span>
               </div>
+              ${authorHtml}
             </div>
           `;
         } else {

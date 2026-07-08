@@ -1,57 +1,46 @@
 {
   "clusters": [
     {
-      "hub_topic": "Inventory Management Software for Small Businesses in India",
+      "hub_topic": "GST Billing and Inventory Management",
       "demand": "High",
-      "intent": "Informational",
-      "product_fit_rationale": "Our product supports inventory management, which is a key feature for small businesses in India. Additionally, our product has features like gst compliance, barcode scanning, and low stock alerts that are relevant to this cluster.",
-      "keywords": [
-        "best inventory management software for small businesses india",
-        "inventory management software for small retail business india",
-        "best inventory software for small business in india",
-        "inventory management software for indian smb"
-      ]
-    },
-    {
-      "hub_topic": "Inventory Management Software with GST Compliance",
-      "demand": "Medium",
       "intent": "Transactional",
-      "product_fit_rationale": "Our product supports gst compliance and inventory management, making it a good fit for this cluster.",
+      "product_fit_rationale": "Our product supports gst_compliance, inventory_management, and smart_invoice_management, which aligns with the needs of businesses looking for GST billing and inventory management solutions.",
       "keywords": [
-        "inventory management software with gst compliance"
+        "gst billing and inventory management",
+        "gst compliant inventory management software",
+        "inventory management and gst billing software",
+        "billing software with inventory management features"
       ]
     },
     {
-      "hub_topic": "Choosing Inventory Management Software in India",
+      "hub_topic": "Real-Time Inventory Tracking",
       "demand": "Medium",
       "intent": "Informational",
-      "product_fit_rationale": "Our product has features like real-time stock syncing, multi-warehouse management, and barcode scanning that are relevant to this cluster.",
+      "product_fit_rationale": "Our product supports real_time_sales_updates, inventory_monitoring, and inventory_synchronization, which enables real-time inventory tracking across multiple locations.",
       "keywords": [
-        "how to choose inventory management software in india",
-        "features of inventory management software",
-        "benefits of inventory management software for business"
+        "track stock levels in real time",
+        "track inventory across multiple locations"
       ]
     },
     {
-      "hub_topic": "Advanced Inventory Management Features",
-      "demand": "Low",
-      "intent": "Informational",
-      "product_fit_rationale": "Our product supports features like real-time stock syncing, low stock alerts, and barcode scanning that are relevant to this cluster.",
+      "hub_topic": "Billing and Inventory Software for Small Business",
+      "demand": "High",
+      "intent": "Transactional",
+      "product_fit_rationale": "Our product supports small businesses with features like smart_billing_automation, inventory_management, and customer_management, making it an ideal solution for their billing and inventory needs.",
       "keywords": [
-        "real time stock syncing inventory software",
-        "inventory software with low stock alerts",
-        "inventory management software with barcode scanning"
+        "billing and inventory software for small business",
+        "inventory management software for small businesses",
+        "billing software for inventory tracking"
       ]
     },
     {
-      "hub_topic": "Inventory Management for Multi-Location Stores and Wholesale Business",
-      "demand": "Low",
+      "hub_topic": "Automated Inventory Updates and Invoicing",
+      "demand": "Medium",
       "intent": "Informational",
-      "product_fit_rationale": "Our product supports multi-warehouse inventory management and gst compliance, making it a good fit for this cluster.",
+      "product_fit_rationale": "Our product supports automated_recurring_invoices, smart_invoice_management, and inventory_management, which enables automated inventory updates with billing software.",
       "keywords": [
-        "inventory management software for multi location stores",
-        "inventory management software for wholesale business india",
-        "multi warehouse inventory management software india"
+        "automate inventory updates with billing software",
+        "inventory management and invoicing software"
       ]
     }
   ],

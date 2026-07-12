@@ -1,328 +1,304 @@
 {
   "surviving_keywords": [
-    "gst billing and inventory management",
-    "track stock levels in real time",
-    "billing and inventory software for small business",
-    "gst compliant inventory management software",
-    "inventory management software for msme india",
-    "track inventory across multiple locations",
-    "automate inventory updates with billing software",
-    "inventory management software for small businesses",
-    "billing software for inventory tracking",
-    "inventory management and invoicing software",
-    "best inventory management software for smb",
-    "inventory tracking and management tools",
-    "invoicing and inventory management system",
-    "manage stock and inventory with billing software",
-    "billing software with inventory management features",
-    "inventory management and gst billing software"
+    "best pos billing software for retail shops india",
+    "cloud pos billing software for small retail shops",
+    "retail shop billing software with gst",
+    "pos billing software for indian retail stores",
+    "retail pos billing software with inventory management",
+    "gst compliant pos billing software for retail",
+    "best pos software for retail stores in india",
+    "pos billing software for retail business india",
+    "top cloud pos billing solutions in india",
+    "retail pos billing software for small businesses",
+    "best cloud pos for small retail shops in india",
+    "fast and accurate billing pos software",
+    "automatic gst compliant invoicing pos software",
+    "best retail billing software for shops in india",
+    "cloud based retail pos billing software",
+    "retail billing software with free trial"
   ],
   "passed": [
-    "gst billing and inventory management",
-    "track stock levels in real time",
-    "billing and inventory software for small business",
-    "gst compliant inventory management software",
-    "inventory management software for msme india",
-    "track inventory across multiple locations",
-    "automate inventory updates with billing software"
+    "best pos billing software for retail shops india",
+    "cloud pos billing software for small retail shops",
+    "retail shop billing software with gst",
+    "pos billing software for indian retail stores",
+    "retail pos billing software with inventory management",
+    "gst compliant pos billing software for retail",
+    "best pos software for retail stores in india",
+    "pos billing software for retail business india",
+    "top cloud pos billing solutions in india",
+    "retail pos billing software for small businesses",
+    "best cloud pos for small retail shops in india",
+    "fast and accurate billing pos software",
+    "automatic gst compliant invoicing pos software"
   ],
   "maybe": [
-    "inventory management software for small businesses",
-    "billing software for inventory tracking",
-    "inventory management and invoicing software",
-    "best inventory management software for smb",
-    "inventory tracking and management tools",
-    "invoicing and inventory management system",
-    "manage stock and inventory with billing software",
-    "billing software with inventory management features",
-    "inventory management and gst billing software"
+    "best retail billing software for shops in india",
+    "cloud based retail pos billing software",
+    "retail billing software with free trial"
   ],
   "failed": [],
   "full_report": [
     {
-      "keyword": "inventory management software for small businesses",
-      "verdict": "MAYBE",
-      "score": 4,
-      "tier1_hits": [
-        "zoho.com"
-      ],
-      "tier2_hits": [
-        "profitbooks.net"
-      ],
-      "top_5_domains": [
-        "zoho.com",
-        "reddit.com",
-        "sortly.com",
-        "unicommerce.com",
-        "mybillbook.in"
-      ],
-      "reason": "Moderate competition (score=4). Tier 1 domains present: zoho.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
-    },
-    {
-      "keyword": "billing software for inventory tracking",
-      "verdict": "MAYBE",
-      "score": 7,
-      "tier1_hits": [
-        "zoho.com",
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [
-        "profitbooks.net"
-      ],
-      "top_5_domains": [
-        "mybillbook.in",
-        "zoho.com",
-        "tallysolutions.com",
-        "profitbooks.net",
-        "keel.so"
-      ],
-      "reason": "Moderate competition (score=7). Tier 1 domains present: zoho.com, tallysolutions.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
-    },
-    {
-      "keyword": "gst billing and inventory management",
+      "keyword": "best pos billing software for retail shops india",
       "verdict": "PASS",
       "score": 0,
       "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
-        "khatabilling.com",
-        "gimbooks.com",
-        "billingsoftwareindia.in",
-        "scribd.com",
-        "catalystk.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "track stock levels in real time",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "netsuite.com",
-        "inventory-planner.com",
-        "youtube.com",
-        "ijsret.com",
-        "packagex.io"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "inventory management and invoicing software",
-      "verdict": "MAYBE",
-      "score": 7,
-      "tier1_hits": [
-        "zoho.com",
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [
-        "profitbooks.net"
-      ],
-      "top_5_domains": [
-        "mybillbook.in",
-        "invoicemaster.org",
-        "zoho.com",
-        "tallysolutions.com",
-        "profitbooks.net"
-      ],
-      "reason": "Moderate competition (score=7). Tier 1 domains present: zoho.com, tallysolutions.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
-    },
-    {
-      "keyword": "best inventory management software for smb",
-      "verdict": "MAYBE",
-      "score": 6,
-      "tier1_hits": [
-        "zoho.com",
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "zoho.com",
-        "reddit.com",
-        "youtube.com",
-        "unicommerce.com",
-        "tallysolutions.com"
-      ],
-      "reason": "Moderate competition (score=6). Tier 1 domains present: zoho.com, tallysolutions.com. Winnable with strong content."
-    },
-    {
-      "keyword": "billing and inventory software for small business",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "mybillbook.in",
-        "khatabilling.com",
-        "keel.so",
-        "webledger.in",
-        "play.google.com"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "inventory tracking and management tools",
-      "verdict": "MAYBE",
-      "score": 6,
-      "tier1_hits": [
-        "zoho.com",
-        "investopedia.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "acctivate.com",
-        "zoho.com",
-        "odoo.com",
-        "netsuite.com",
-        "reddit.com"
-      ],
-      "reason": "Moderate competition (score=6). Tier 1 domains present: zoho.com, investopedia.com. Winnable with strong content."
-    },
-    {
-      "keyword": "gst compliant inventory management software",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "tallysolutions.com",
-        "khatabilling.com",
-        "sleekbill.in",
-        "refrens.com",
-        "margbooks.com"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "invoicing and inventory management system",
-      "verdict": "MAYBE",
-      "score": 4,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [
-        "profitbooks.net"
-      ],
-      "top_5_domains": [
-        "invoicemaster.org",
-        "tallysolutions.com",
-        "mybillbook.in",
-        "play.google.com",
-        "stripe.com"
-      ],
-      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
-    },
-    {
-      "keyword": "manage stock and inventory with billing software",
-      "verdict": "MAYBE",
-      "score": 7,
-      "tier1_hits": [
-        "tallysolutions.com",
-        "zoho.com"
-      ],
-      "tier2_hits": [
-        "profitbooks.net"
-      ],
-      "top_5_domains": [
-        "mybillbook.in",
-        "tallysolutions.com",
-        "invoicemaster.org",
-        "zoho.com",
-        "play.google.com"
-      ],
-      "reason": "Moderate competition (score=7). Tier 1 domains present: tallysolutions.com, zoho.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
-    },
-    {
-      "keyword": "inventory management software for msme india",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "tallysolutions.com",
-        "pactsoft.in",
         "vasyerp.com",
-        "tezerp.com",
-        "kinaracapital.com"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "billing software with inventory management features",
-      "verdict": "MAYBE",
-      "score": 4,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [
-        "profitbooks.net"
-      ],
-      "top_5_domains": [
+        "gofrugal.com",
+        "logicerp.com",
         "mybillbook.in",
-        "tallysolutions.com",
-        "profitbooks.net",
-        "keel.so",
-        "khatabilling.com"
-      ],
-      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
-    },
-    {
-      "keyword": "track inventory across multiple locations",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "help.shopify.com",
-        "sortly.com",
-        "inflowinventory.com",
-        "netstock.com",
         "youtube.com"
       ],
       "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "automate inventory updates with billing software",
+      "keyword": "cloud pos billing software for small retail shops",
       "verdict": "PASS",
       "score": 1,
       "tier1_hits": [],
       "tier2_hits": [
-        "profitbooks.net"
+        "techjockey.com"
       ],
       "top_5_domains": [
-        "refrens.com",
-        "keel.so",
-        "clappia.com",
-        "webledger.in",
-        "gimbooks.com"
+        "vasyerp.com",
+        "timdtech.com",
+        "mybillbook.in",
+        "retailpos.co.in",
+        "logicerp.com"
       ],
       "reason": "Low authority presence (score=1). Winnable with quality content."
     },
     {
-      "keyword": "inventory management and gst billing software",
+      "keyword": "retail shop billing software with gst",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "refrens.com",
+        "youtube.com",
+        "reddit.com",
+        "mybillbook.in",
+        "accountune.com"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "pos billing software for indian retail stores",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "reddit.com",
+        "queuebuster.co",
+        "mybillbook.in",
+        "rednote.in",
+        "hyperdrivesolutions.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "best retail billing software for shops in india",
       "verdict": "MAYBE",
       "score": 4,
       "tier1_hits": [
         "tallysolutions.com"
       ],
       "tier2_hits": [
-        "profitbooks.net"
+        "techjockey.com"
       ],
       "top_5_domains": [
-        "khatabilling.com",
-        "billingsoftwareindia.in",
+        "mybillbook.in",
+        "vasyerp.com",
         "tallysolutions.com",
-        "innoventrysoftware.com",
-        "play.google.com"
+        "youtube.com",
+        "amazon.in"
       ],
-      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: profitbooks.net. Winnable with strong content."
+      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: techjockey.com. Winnable with strong content."
+    },
+    {
+      "keyword": "cloud based retail pos billing software",
+      "verdict": "MAYBE",
+      "score": 4,
+      "tier1_hits": [
+        "forbes.com"
+      ],
+      "tier2_hits": [
+        "techjockey.com"
+      ],
+      "top_5_domains": [
+        "salesforce.com",
+        "vasyerp.com",
+        "gofrugal.com",
+        "margbooks.com",
+        "forbes.com"
+      ],
+      "reason": "Moderate competition (score=4). Tier 1 domains present: forbes.com | Tier 2 domains present: techjockey.com. Winnable with strong content."
+    },
+    {
+      "keyword": "retail pos billing software with inventory management",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "retailpos.co.in",
+        "vasyerp.com",
+        "inventoryplus.in",
+        "retailerspos.com",
+        "mybillbook.in"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "gst compliant pos billing software for retail",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "vasyerp.com",
+        "logicerp.com",
+        "accountune.com",
+        "mybillbook.in",
+        "business.paytm.com"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "best pos software for retail stores in india",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "vasyerp.com",
+        "retailpos.co.in",
+        "logicerp.com",
+        "gofrugal.com",
+        "dir.indiamart.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "retail billing software with free trial",
+      "verdict": "MAYBE",
+      "score": 7,
+      "tier1_hits": [
+        "tallysolutions.com",
+        "zoho.com"
+      ],
+      "tier2_hits": [
+        "techjockey.com"
+      ],
+      "top_5_domains": [
+        "tallysolutions.com",
+        "khatabilling.com",
+        "gofrugal.com",
+        "billingsoftwareindia.in",
+        "dir.indiamart.com"
+      ],
+      "reason": "Moderate competition (score=7). Tier 1 domains present: tallysolutions.com, zoho.com | Tier 2 domains present: techjockey.com. Winnable with strong content."
+    },
+    {
+      "keyword": "pos billing software for retail business india",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "vasyerp.com",
+        "mybillbook.in",
+        "business.paytm.com",
+        "rednote.in",
+        "youtube.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "top cloud pos billing solutions in india",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "vasyerp.com",
+        "timdtech.com",
+        "gofrugal.com",
+        "dir.indiamart.com",
+        "margbooks.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "retail pos billing software for small businesses",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "vasyerp.com",
+        "amazon.in",
+        "mybillbook.in",
+        "logicerp.com",
+        "softhealer.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "best cloud pos for small retail shops in india",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "forbes.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "vasyerp.com",
+        "logicerp.com",
+        "gofrugal.com",
+        "retailpos.co.in",
+        "dir.indiamart.com"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "fast and accurate billing pos software",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "vasyerp.com",
+        "softhealer.com",
+        "youtube.com",
+        "focussoftnet.com",
+        "fastsoftwaretechnology.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "automatic gst compliant invoicing pos software",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "gogstbill.com",
+        "billingsoftwareindia.in",
+        "er4u.in",
+        "khatabilling.com",
+        "hyperdrivesolutions.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     }
   ]
 }

@@ -1,48 +1,52 @@
 {
   "clusters": [
     {
-      "hub_topic": "GST Billing and Inventory Management",
+      "hub_topic": "POS Billing Software for Retail",
       "demand": "High",
       "intent": "Transactional",
-      "product_fit_rationale": "Our product supports gst_compliance, inventory_management, and smart_invoice_management, which aligns with the needs of businesses looking for GST billing and inventory management solutions.",
+      "product_fit_rationale": "Our product supports pos_billing, gst_compliance, and inventory_management, making it a strong fit for retail shops in India.",
       "keywords": [
-        "gst billing and inventory management",
-        "gst compliant inventory management software",
-        "inventory management and gst billing software",
-        "billing software with inventory management features"
+        "best pos billing software for retail shops india",
+        "cloud pos billing software for small retail shops",
+        "retail shop billing software with gst",
+        "pos billing software for indian retail stores",
+        "retail pos billing software with inventory management",
+        "gst compliant pos billing software for retail",
+        "best pos software for retail stores in india",
+        "pos billing software for retail business india",
+        "retail pos billing software for small businesses",
+        "best cloud pos for small retail shops in india",
+        "cloud based retail pos billing software",
+        "retail billing software with free trial"
       ]
     },
     {
-      "hub_topic": "Real-Time Inventory Tracking",
+      "hub_topic": "Efficient and Accurate Billing",
       "demand": "Medium",
       "intent": "Informational",
-      "product_fit_rationale": "Our product supports real_time_sales_updates, inventory_monitoring, and inventory_synchronization, which enables real-time inventory tracking across multiple locations.",
+      "product_fit_rationale": "Our product offers automatic_tax_calculations and smart_invoice_management, which align with the need for fast and accurate billing.",
       "keywords": [
-        "track stock levels in real time",
-        "track inventory across multiple locations"
+        "fast and accurate billing pos software"
       ]
     },
     {
-      "hub_topic": "Billing and Inventory Software for Small Business",
-      "demand": "High",
-      "intent": "Transactional",
-      "product_fit_rationale": "Our product supports small businesses with features like smart_billing_automation, inventory_management, and customer_management, making it an ideal solution for their billing and inventory needs.",
-      "keywords": [
-        "billing and inventory software for small business",
-        "inventory management software for small businesses",
-        "billing software for inventory tracking"
-      ]
-    },
-    {
-      "hub_topic": "Automated Inventory Updates and Invoicing",
+      "hub_topic": "GST Compliant Invoicing",
       "demand": "Medium",
       "intent": "Informational",
-      "product_fit_rationale": "Our product supports automated_recurring_invoices, smart_invoice_management, and inventory_management, which enables automated inventory updates with billing software.",
+      "product_fit_rationale": "Our product supports gst_compliance and automated_tax_calculations, making it suitable for automatic GST compliant invoicing.",
       "keywords": [
-        "automate inventory updates with billing software",
-        "inventory management and invoicing software"
+        "automatic gst compliant invoicing pos software"
       ]
     }
   ],
-  "rejected_keywords": []
+  "rejected_keywords": [
+    {
+      "original": "top cloud pos billing solutions in india",
+      "reason": "Too broad and does not specifically imply a feature we support."
+    },
+    {
+      "original": "best retail billing software for shops in india",
+      "reason": "Already covered by the 'POS Billing Software for Retail' cluster."
+    }
+  ]
 }

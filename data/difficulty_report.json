@@ -1,296 +1,236 @@
 {
   "surviving_keywords": [
-    "pos billing software for small businesses",
-    "retail pos software for billing and inventory",
-    "point of sale system for small stores",
-    "best pos billing software in india",
-    "pos system for retail shops and restaurants",
-    "features of pos billing software",
-    "gst compliant pos billing software",
-    "pos software for small business management",
-    "retail billing and inventory management",
-    "best pos system for small retailers",
-    "pos billing and invoicing app",
-    "point of sale billing system for small stores",
-    "pos system for small business growth",
-    "easy to use pos billing software",
-    "pos software with inventory management",
-    "how to choose the best pos system"
+    "how to file gstr-1 return online",
+    "gstr-1 filing process step by step",
+    "gstr-1 return filing due date",
+    "how to prepare gstr-1 return",
+    "gstr-1 offline filing procedure",
+    "gstr-1 filing using json file",
+    "gst portal gstr-1 filing guide",
+    "how to upload gstr-1 return",
+    "step by step gstr-1 filing process",
+    "gstr-1 filing using returns offline tool",
+    "gstr-1 filing essentials for businesses",
+    "gstr-1 filing due dates and integration"
   ],
   "passed": [
-    "pos billing software for small businesses",
-    "retail pos software for billing and inventory",
-    "point of sale system for small stores",
-    "best pos billing software in india",
-    "pos system for retail shops and restaurants",
-    "features of pos billing software",
-    "gst compliant pos billing software",
-    "pos software for small business management",
-    "retail billing and inventory management",
-    "best pos system for small retailers",
-    "pos billing and invoicing app",
-    "point of sale billing system for small stores",
-    "pos system for small business growth",
-    "easy to use pos billing software",
-    "pos software with inventory management"
+    "how to file gstr-1 return online",
+    "gstr-1 filing process step by step",
+    "gstr-1 return filing due date",
+    "how to prepare gstr-1 return",
+    "gstr-1 offline filing procedure",
+    "gstr-1 filing using json file",
+    "gst portal gstr-1 filing guide",
+    "how to upload gstr-1 return",
+    "step by step gstr-1 filing process",
+    "gstr-1 filing using returns offline tool"
   ],
   "maybe": [
-    "how to choose the best pos system"
+    "gstr-1 filing essentials for businesses",
+    "gstr-1 filing due dates and integration"
   ],
   "failed": [],
   "full_report": [
     {
-      "keyword": "pos billing software for small businesses",
+      "keyword": "how to file gstr-1 return online",
       "verdict": "PASS",
       "score": 0,
       "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
-        "mybillbook.in",
-        "softhealer.com",
-        "vasyerp.com",
-        "play.google.com",
-        "justbilling.in"
+        "tutorial.gst.gov.in",
+        "youtube.com",
+        "youtube.com",
+        "tutorial.gst.gov.in",
+        "myonlineca.in"
       ],
       "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "retail pos software for billing and inventory",
+      "keyword": "gstr-1 filing process step by step",
       "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
+      "score": 3,
+      "tier1_hits": [
+        "tallysolutions.com"
+      ],
       "tier2_hits": [],
       "top_5_domains": [
-        "retailpos.co.in",
-        "vasyerp.com",
-        "mybillbook.in",
-        "gofrugal.com",
-        "logicerp.com"
+        "tutorial.gst.gov.in",
+        "youtube.com",
+        "youtube.com",
+        "gstzen.in",
+        "youtube.com"
       ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+      "reason": "Low authority presence (score=3). Winnable with quality content."
     },
     {
-      "keyword": "point of sale system for small stores",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "odoo.com",
-        "squareup.com",
-        "euvic.com",
-        "en.wikipedia.org",
-        "logicerp.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "best pos billing software in india",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "gofrugal.com",
-        "vasyerp.com",
-        "rednote.in",
-        "dir.indiamart.com",
-        "invoicefree.in"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "pos system for retail shops and restaurants",
+      "keyword": "gstr-1 return filing due date",
       "verdict": "PASS",
       "score": 1,
       "tier1_hits": [],
       "tier2_hits": [
-        "techjockey.com"
+        "bajajfinserv.in"
       ],
       "top_5_domains": [
-        "squareup.com",
-        "gofrugal.com",
-        "uschamber.com",
-        "techjockey.com",
-        "retailpos.co.in"
+        "kdksoftware.com",
+        "tutorial.gst.gov.in",
+        "kotak.bank.in",
+        "bajajfinserv.in",
+        "gimbooks.com"
       ],
       "reason": "Low authority presence (score=1). Winnable with quality content."
     },
     {
-      "keyword": "how to choose the best pos system",
+      "keyword": "how to prepare gstr-1 return",
+      "verdict": "PASS",
+      "score": 1,
+      "tier1_hits": [],
+      "tier2_hits": [
+        "indiafilings.com"
+      ],
+      "top_5_domains": [
+        "tutorial.gst.gov.in",
+        "youtube.com",
+        "gstzen.in",
+        "youtube.com",
+        "help.tallysolutions.com"
+      ],
+      "reason": "Low authority presence (score=1). Winnable with quality content."
+    },
+    {
+      "keyword": "gstr-1 offline filing procedure",
+      "verdict": "PASS",
+      "score": 1,
+      "tier1_hits": [],
+      "tier2_hits": [
+        "indiafilings.com"
+      ],
+      "top_5_domains": [
+        "youtube.com",
+        "indiafilings.com",
+        "youtube.com",
+        "gstindiaonline.com",
+        "gstzen.in"
+      ],
+      "reason": "Low authority presence (score=1). Winnable with quality content."
+    },
+    {
+      "keyword": "gstr-1 filing using json file",
+      "verdict": "PASS",
+      "score": 1,
+      "tier1_hits": [],
+      "tier2_hits": [
+        "indiafilings.com"
+      ],
+      "top_5_domains": [
+        "indiafilings.com",
+        "youtube.com",
+        "gstzen.in",
+        "youtube.com",
+        "help.tallysolutions.com"
+      ],
+      "reason": "Low authority presence (score=1). Winnable with quality content."
+    },
+    {
+      "keyword": "gst portal gstr-1 filing guide",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "tutorial.gst.gov.in",
+        "tutorial.gst.gov.in",
+        "gstzen.in",
+        "webtel.in",
+        "youtube.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "how to upload gstr-1 return",
+      "verdict": "PASS",
+      "score": 3,
+      "tier1_hits": [
+        "zoho.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "youtube.com",
+        "tutorial.gst.gov.in",
+        "help.tallysolutions.com",
+        "youtube.com",
+        "bizhub.tcsion.com"
+      ],
+      "reason": "Low authority presence (score=3). Winnable with quality content."
+    },
+    {
+      "keyword": "gstr-1 filing essentials for businesses",
       "verdict": "MAYBE",
       "score": 6,
       "tier1_hits": [
-        "forbes.com",
-        "nerdwallet.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "merchants.fiserv.com",
-        "forbes.com",
-        "youtube.com",
-        "uschamber.com",
-        "nerdwallet.com"
-      ],
-      "reason": "Moderate competition (score=6). Tier 1 domains present: forbes.com, nerdwallet.com. Winnable with strong content."
-    },
-    {
-      "keyword": "features of pos billing software",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "vasyerp.com",
-        "justbilling.in",
-        "logicerp.com",
-        "vyaparapp.in",
-        "retailpos.co.in"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "gst compliant pos billing software",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "vasyerp.com",
-        "mybillbook.in",
-        "billingsoftwareindia.in",
-        "vyaparapp.in",
-        "hyperdrivesolutions.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "pos software for small business management",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "forbes.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "odoo.com",
-        "retailpos.co.in",
-        "euvic.com",
-        "logicerp.com",
-        "gofrugal.com"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "retail billing and inventory management",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "mybillbook.in",
-        "vasyerp.com",
         "tallysolutions.com",
+        "zoho.com"
+      ],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "webtel.in",
+        "tutorial.gst.gov.in",
+        "taxone.vyapar.com",
+        "commenda.io",
+        "vjmglobal.com"
+      ],
+      "reason": "Moderate competition (score=6). Tier 1 domains present: tallysolutions.com, zoho.com. Winnable with strong content."
+    },
+    {
+      "keyword": "step by step gstr-1 filing process",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "tutorial.gst.gov.in",
         "youtube.com",
-        "logicerp.com"
+        "gstzen.in",
+        "youtube.com",
+        "razorpay.com"
       ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "best pos system for small retailers",
+      "keyword": "gstr-1 filing using returns offline tool",
       "verdict": "PASS",
-      "score": 3,
+      "score": 1,
+      "tier1_hits": [],
+      "tier2_hits": [
+        "indiafilings.com"
+      ],
+      "top_5_domains": [
+        "youtube.com",
+        "indiafilings.com",
+        "nagalandtax.nic.in",
+        "youtube.com",
+        "gstindiaonline.com"
+      ],
+      "reason": "Low authority presence (score=1). Winnable with quality content."
+    },
+    {
+      "keyword": "gstr-1 filing due dates and integration",
+      "verdict": "MAYBE",
+      "score": 4,
       "tier1_hits": [
-        "forbes.com"
+        "tallysolutions.com"
       ],
-      "tier2_hits": [],
+      "tier2_hits": [
+        "bajajfinserv.in"
+      ],
       "top_5_domains": [
-        "retailpos.co.in",
-        "reddit.com",
-        "vasyerp.com",
-        "logicerp.com",
-        "gofrugal.com"
+        "tutorial.gst.gov.in",
+        "bajajfinserv.in",
+        "cashfree.com",
+        "kdksoftware.com",
+        "kotak.bank.in"
       ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "pos billing and invoicing app",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "play.google.com",
-        "mybillbook.in",
-        "invoicefree.in",
-        "business.paytm.com",
-        "squareup.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "point of sale billing system for small stores",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "mybillbook.in",
-        "softhealer.com",
-        "retailpos.co.in",
-        "amazon.in",
-        "gofrugal.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "pos system for small business growth",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "salesforce.com",
-        "ruddersoft.com",
-        "uschamber.com",
-        "euvic.com",
-        "celerant.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "easy to use pos billing software",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "vasyerp.com",
-        "mybillbook.in",
-        "play.google.com",
-        "softhealer.com",
-        "justbilling.in"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
-    },
-    {
-      "keyword": "pos software with inventory management",
-      "verdict": "PASS",
-      "score": 0,
-      "tier1_hits": [],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "codecanyon.net",
-        "retailpos.co.in",
-        "vasyerp.com",
-        "loyverse.com",
-        "odoo.com"
-      ],
-      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: bajajfinserv.in. Winnable with strong content."
     }
   ]
 }

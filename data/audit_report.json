@@ -1,10 +1,53 @@
 {
-  "top_10": [],
-  "page_2_refresh": [],
-  "not_found_or_deep": [
+  "top_10": [
+    {
+      "keyword": "gst compliant inventory management",
+      "filename": "gst-compliant-inventory-management.json",
+      "rank": 3,
+      "url": "https://www.invohydra.com/blog/gst-billing-and-inventory-management-solutions"
+    },
     {
       "keyword": "gst billing and inventory management solutions",
       "filename": "gst-billing-and-inventory-management-solutions.json",
+      "rank": 6,
+      "url": "https://www.invohydra.com/blog/gst-billing-and-inventory-management-solutions"
+    },
+    {
+      "keyword": "pos billing software for small businesses",
+      "filename": "pos-billing-software-for-small-businesses.json",
+      "rank": 6,
+      "url": "https://www.invohydra.com/blog/pos-billing-software-for-small-businesses"
+    }
+  ],
+  "page_2_refresh": [],
+  "not_found_or_deep": [
+    {
+      "keyword": "gstr 1 filing made easy",
+      "filename": "gstr-1-filing-made-easy.json",
+      "rank": -1,
+      "url": null
+    },
+    {
+      "keyword": "confused about invoices",
+      "filename": "confused-about-invoices.json",
+      "rank": -1,
+      "url": null
+    },
+    {
+      "keyword": "fast and accurate billing solutions",
+      "filename": "fast-and-accurate-billing-solutions.json",
+      "rank": -1,
+      "url": null
+    },
+    {
+      "keyword": "pos billing software for retail",
+      "filename": "pos-billing-software-for-retail.json",
+      "rank": -1,
+      "url": null
+    },
+    {
+      "keyword": "gstr 1 filing process guide",
+      "filename": "gstr-1-filing-process-guide.json",
       "rank": -1,
       "url": null
     },
@@ -15,8 +58,8 @@
       "url": null
     },
     {
-      "keyword": "gst compliant inventory management",
-      "filename": "gst-compliant-inventory-management.json",
+      "keyword": "choosing the right pos system",
+      "filename": "choosing-the-right-pos-system.json",
       "rank": -1,
       "url": null
     },
@@ -27,8 +70,14 @@
       "url": null
     },
     {
-      "keyword": "small business accounting and bookkeeping tips",
-      "filename": "small-business-accounting-and-bookkeeping-tips.json",
+      "keyword": "gst verification api for businesses",
+      "filename": "gst-verification-api-for-businesses.json",
+      "rank": -1,
+      "url": null
+    },
+    {
+      "keyword": "bulk gstin validation for gst compliance",
+      "filename": "bulk-gstin-validation-for-gst-compliance.json",
       "rank": -1,
       "url": null
     },
@@ -39,8 +88,8 @@
       "url": null
     },
     {
-      "keyword": "confused about invoices",
-      "filename": "confused-about-invoices.json",
+      "keyword": "small business accounting and bookkeeping tips",
+      "filename": "small-business-accounting-and-bookkeeping-tips.json",
       "rank": -1,
       "url": null
     }

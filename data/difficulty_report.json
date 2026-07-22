@@ -1,236 +1,272 @@
 {
   "surviving_keywords": [
-    "how to file gstr-1 return online",
-    "gstr-1 filing process step by step",
-    "gstr-1 return filing due date",
-    "how to prepare gstr-1 return",
-    "gstr-1 offline filing procedure",
-    "gstr-1 filing using json file",
-    "gst portal gstr-1 filing guide",
-    "how to upload gstr-1 return",
-    "step by step gstr-1 filing process",
-    "gstr-1 filing using returns offline tool",
-    "gstr-1 filing essentials for businesses",
-    "gstr-1 filing due dates and integration"
+    "bulk gstin validation api",
+    "gst verification api for businesses",
+    "bulk gstin verification tool",
+    "gst verification api providers in india",
+    "gst verification api for erp integration",
+    "bulk gstin search and verification",
+    "gstin verification api for compliance",
+    "instant gst number validation api",
+    "bulk gst verification for businesses",
+    "gst verification api for accounting software",
+    "gstin validation and verification api",
+    "bulk gstin verification online",
+    "gst verification api for india",
+    "real time gstin verification",
+    "how to validate gstin online"
   ],
   "passed": [
-    "how to file gstr-1 return online",
-    "gstr-1 filing process step by step",
-    "gstr-1 return filing due date",
-    "how to prepare gstr-1 return",
-    "gstr-1 offline filing procedure",
-    "gstr-1 filing using json file",
-    "gst portal gstr-1 filing guide",
-    "how to upload gstr-1 return",
-    "step by step gstr-1 filing process",
-    "gstr-1 filing using returns offline tool"
+    "bulk gstin validation api",
+    "gst verification api for businesses",
+    "bulk gstin verification tool",
+    "gst verification api providers in india",
+    "gst verification api for erp integration",
+    "bulk gstin search and verification",
+    "gstin verification api for compliance",
+    "instant gst number validation api",
+    "bulk gst verification for businesses",
+    "gst verification api for accounting software",
+    "gstin validation and verification api",
+    "bulk gstin verification online",
+    "gst verification api for india"
   ],
   "maybe": [
-    "gstr-1 filing essentials for businesses",
-    "gstr-1 filing due dates and integration"
+    "real time gstin verification",
+    "how to validate gstin online"
   ],
   "failed": [],
   "full_report": [
     {
-      "keyword": "how to file gstr-1 return online",
+      "keyword": "bulk gstin validation api",
       "verdict": "PASS",
       "score": 0,
       "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
-        "tutorial.gst.gov.in",
-        "youtube.com",
-        "youtube.com",
-        "tutorial.gst.gov.in",
-        "myonlineca.in"
+        "my.gstzen.in",
+        "gstincheck.co.in",
+        "einv-apisandbox.nic.in",
+        "sepfust.com",
+        "developer.iserveu.in"
       ],
       "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "gstr-1 filing process step by step",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "tallysolutions.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "tutorial.gst.gov.in",
-        "youtube.com",
-        "youtube.com",
-        "gstzen.in",
-        "youtube.com"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "gstr-1 return filing due date",
-      "verdict": "PASS",
-      "score": 1,
-      "tier1_hits": [],
-      "tier2_hits": [
-        "bajajfinserv.in"
-      ],
-      "top_5_domains": [
-        "kdksoftware.com",
-        "tutorial.gst.gov.in",
-        "kotak.bank.in",
-        "bajajfinserv.in",
-        "gimbooks.com"
-      ],
-      "reason": "Low authority presence (score=1). Winnable with quality content."
-    },
-    {
-      "keyword": "how to prepare gstr-1 return",
-      "verdict": "PASS",
-      "score": 1,
-      "tier1_hits": [],
-      "tier2_hits": [
-        "indiafilings.com"
-      ],
-      "top_5_domains": [
-        "tutorial.gst.gov.in",
-        "youtube.com",
-        "gstzen.in",
-        "youtube.com",
-        "help.tallysolutions.com"
-      ],
-      "reason": "Low authority presence (score=1). Winnable with quality content."
-    },
-    {
-      "keyword": "gstr-1 offline filing procedure",
-      "verdict": "PASS",
-      "score": 1,
-      "tier1_hits": [],
-      "tier2_hits": [
-        "indiafilings.com"
-      ],
-      "top_5_domains": [
-        "youtube.com",
-        "indiafilings.com",
-        "youtube.com",
-        "gstindiaonline.com",
-        "gstzen.in"
-      ],
-      "reason": "Low authority presence (score=1). Winnable with quality content."
-    },
-    {
-      "keyword": "gstr-1 filing using json file",
-      "verdict": "PASS",
-      "score": 1,
-      "tier1_hits": [],
-      "tier2_hits": [
-        "indiafilings.com"
-      ],
-      "top_5_domains": [
-        "indiafilings.com",
-        "youtube.com",
-        "gstzen.in",
-        "youtube.com",
-        "help.tallysolutions.com"
-      ],
-      "reason": "Low authority presence (score=1). Winnable with quality content."
-    },
-    {
-      "keyword": "gst portal gstr-1 filing guide",
+      "keyword": "gst verification api for businesses",
       "verdict": "PASS",
       "score": 0,
       "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
-        "tutorial.gst.gov.in",
-        "tutorial.gst.gov.in",
-        "gstzen.in",
-        "webtel.in",
-        "youtube.com"
+        "microvistatech.com",
+        "eps.eko.in",
+        "perfios.ai",
+        "surepass.io",
+        "developer.iserveu.in"
       ],
       "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "how to upload gstr-1 return",
-      "verdict": "PASS",
-      "score": 3,
-      "tier1_hits": [
-        "zoho.com"
-      ],
-      "tier2_hits": [],
-      "top_5_domains": [
-        "youtube.com",
-        "tutorial.gst.gov.in",
-        "help.tallysolutions.com",
-        "youtube.com",
-        "bizhub.tcsion.com"
-      ],
-      "reason": "Low authority presence (score=3). Winnable with quality content."
-    },
-    {
-      "keyword": "gstr-1 filing essentials for businesses",
+      "keyword": "real time gstin verification",
       "verdict": "MAYBE",
       "score": 6,
       "tier1_hits": [
-        "tallysolutions.com",
-        "zoho.com"
+        "cleartax.in",
+        "tallysolutions.com"
       ],
       "tier2_hits": [],
       "top_5_domains": [
-        "webtel.in",
-        "tutorial.gst.gov.in",
-        "taxone.vyapar.com",
-        "commenda.io",
-        "vjmglobal.com"
+        "cleartax.in",
+        "expressgst.com",
+        "sepfust.com",
+        "cashfree.com",
+        "staging.gstzen.in"
       ],
-      "reason": "Moderate competition (score=6). Tier 1 domains present: tallysolutions.com, zoho.com. Winnable with strong content."
+      "reason": "Moderate competition (score=6). Tier 1 domains present: cleartax.in, tallysolutions.com. Winnable with strong content."
     },
     {
-      "keyword": "step by step gstr-1 filing process",
+      "keyword": "bulk gstin verification tool",
       "verdict": "PASS",
       "score": 0,
       "tier1_hits": [],
       "tier2_hits": [],
       "top_5_domains": [
-        "tutorial.gst.gov.in",
-        "youtube.com",
-        "gstzen.in",
-        "youtube.com",
-        "razorpay.com"
+        "staging.gstzen.in",
+        "my.gstzen.in",
+        "sepfust.com",
+        "smartgst.in",
+        "nikash.in"
       ],
       "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "gstr-1 filing using returns offline tool",
+      "keyword": "gst verification api providers in india",
       "verdict": "PASS",
-      "score": 1,
+      "score": 0,
       "tier1_hits": [],
-      "tier2_hits": [
-        "indiafilings.com"
-      ],
+      "tier2_hits": [],
       "top_5_domains": [
-        "youtube.com",
-        "indiafilings.com",
-        "nagalandtax.nic.in",
-        "youtube.com",
-        "gstindiaonline.com"
+        "surepass.io",
+        "befisc.com",
+        "microvistatech.com",
+        "gstincheck.co.in",
+        "messagecentral.com"
       ],
-      "reason": "Low authority presence (score=1). Winnable with quality content."
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     },
     {
-      "keyword": "gstr-1 filing due dates and integration",
+      "keyword": "how to validate gstin online",
       "verdict": "MAYBE",
-      "score": 4,
+      "score": 6,
       "tier1_hits": [
+        "cleartax.in",
         "tallysolutions.com"
       ],
-      "tier2_hits": [
-        "bajajfinserv.in"
-      ],
+      "tier2_hits": [],
       "top_5_domains": [
-        "tutorial.gst.gov.in",
-        "bajajfinserv.in",
-        "cashfree.com",
-        "kdksoftware.com",
-        "kotak.bank.in"
+        "cleartax.in",
+        "expressgst.com",
+        "my.gstzen.in",
+        "razorpay.com",
+        "busy.in"
       ],
-      "reason": "Moderate competition (score=4). Tier 1 domains present: tallysolutions.com | Tier 2 domains present: bajajfinserv.in. Winnable with strong content."
+      "reason": "Moderate competition (score=6). Tier 1 domains present: cleartax.in, tallysolutions.com. Winnable with strong content."
+    },
+    {
+      "keyword": "gst verification api for erp integration",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "microvistatech.com",
+        "whitebooks.in",
+        "developer.gst.gov.in",
+        "perfios.ai",
+        "drapcode.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "bulk gstin search and verification",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "staging.gstzen.in",
+        "my.gstzen.in",
+        "nikash.in",
+        "sepfust.com",
+        "mastergst.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "gstin verification api for compliance",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "gstincheck.co.in",
+        "eps.eko.in",
+        "developer.gst.gov.in",
+        "developer.iserveu.in",
+        "drapcode.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "instant gst number validation api",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "gstincheck.co.in",
+        "developer.gst.gov.in",
+        "github.com",
+        "perfios.ai",
+        "microvistatech.com"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "bulk gst verification for businesses",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "my.gstzen.in",
+        "my.gstzen.in",
+        "nikash.in",
+        "mastersindia.co",
+        "gst.getbusiness.co.in"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "gst verification api for accounting software",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "microvistatech.com",
+        "whitebooks.in",
+        "perfios.ai",
+        "ekychub.in",
+        "developer.gst.gov.in"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "gstin validation and verification api",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "gstincheck.co.in",
+        "einv-apisandbox.nic.in",
+        "cashfree.com",
+        "microvistatech.com",
+        "eps.eko.in"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "bulk gstin verification online",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "staging.gstzen.in",
+        "my.gstzen.in",
+        "expressgst.com",
+        "sepfust.com",
+        "nikash.in"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
+    },
+    {
+      "keyword": "gst verification api for india",
+      "verdict": "PASS",
+      "score": 0,
+      "tier1_hits": [],
+      "tier2_hits": [],
+      "top_5_domains": [
+        "github.com",
+        "gstincheck.co.in",
+        "microvistatech.com",
+        "eps.eko.in",
+        "perfios.ai"
+      ],
+      "reason": "No major authority domains in top 10. High opportunity for InvoHydra."
     }
   ]
 }

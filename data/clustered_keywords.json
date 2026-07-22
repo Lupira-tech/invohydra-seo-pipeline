@@ -1,46 +1,64 @@
 {
   "clusters": [
     {
-      "hub_topic": "GSTR-1 Filing Process",
+      "hub_topic": "GST Verification API",
       "demand": "High",
-      "intent": "Informational",
-      "product_fit_rationale": "Our product supports gstr1_reporting_exports and one_click_gstr_reports, which aligns with the GSTR-1 filing process and related queries.",
+      "intent": "Transactional",
+      "product_fit_rationale": "Our product supports GSTIN auto-fetch and GST compliance, which aligns with the need for GST verification APIs for businesses, ERP integration, and accounting software.",
       "keywords": [
-        "how to file gstr-1 return online",
-        "gstr-1 filing process step by step",
-        "gstr-1 return filing due date",
-        "how to prepare gstr-1 return",
-        "step by step gstr-1 filing process",
-        "gstr-1 filing essentials for businesses",
-        "gstr-1 filing due dates and integration"
+        "gst verification api for businesses",
+        "gst verification api for erp integration",
+        "gst verification api for accounting software",
+        "gstin verification api for compliance"
       ]
     },
     {
-      "hub_topic": "GSTR-1 Filing Tools and Guides",
+      "hub_topic": "Bulk GSTIN Validation",
       "demand": "Medium",
       "intent": "Informational",
-      "product_fit_rationale": "Our product supports gst_compliance and ca_friendly_export_formats, which can be useful for businesses looking for guides on GSTR-1 filing.",
+      "product_fit_rationale": "Our product's auto GST calculation and GST compliance features support the need for bulk GSTIN validation and verification tools.",
       "keywords": [
-        "gst portal gstr-1 filing guide"
+        "bulk gstin validation api",
+        "bulk gstin verification tool",
+        "bulk gstin search and verification",
+        "bulk gst verification for businesses",
+        "bulk gstin verification online"
+      ]
+    },
+    {
+      "hub_topic": "GST Verification API Providers",
+      "demand": "Low",
+      "intent": "Informational",
+      "product_fit_rationale": "Our product's GST compliance and GSTIN auto-fetch features make it a suitable provider for GST verification APIs in India.",
+      "keywords": [
+        "gst verification api providers in india",
+        "gst verification api for india"
+      ]
+    },
+    {
+      "hub_topic": "Real-time GSTIN Verification",
+      "demand": "Medium",
+      "intent": "Transactional",
+      "product_fit_rationale": "Our product's real-time payment tracking and GST compliance features support the need for real-time GSTIN verification and instant GST number validation.",
+      "keywords": [
+        "real time gstin verification",
+        "instant gst number validation api"
+      ]
+    },
+    {
+      "hub_topic": "GSTIN Validation and Verification",
+      "demand": "Low",
+      "intent": "Informational",
+      "product_fit_rationale": "Our product's GST compliance and GSTIN auto-fetch features support the need for GSTIN validation and verification APIs.",
+      "keywords": [
+        "gstin validation and verification api"
       ]
     }
   ],
   "rejected_keywords": [
     {
-      "original": "gstr-1 offline filing procedure",
-      "reason": "Our product does not explicitly support offline filing procedures, but rather focuses on online and automated processes."
-    },
-    {
-      "original": "gstr-1 filing using json file",
-      "reason": "While our product supports various export formats, the specific mention of JSON files for GSTR-1 filing is not a highlighted feature."
-    },
-    {
-      "original": "gstr-1 filing using returns offline tool",
-      "reason": "Similar to the offline filing procedure, our product does not emphasize the use of offline tools for GSTR-1 filing."
-    },
-    {
-      "original": "how to upload gstr-1 return",
-      "reason": "The focus of our product is more on the generation and management of GSTR-1 returns rather than the upload process itself."
+      "original": "how to validate gstin online",
+      "reason": "This keyword is too generic and does not directly relate to our product's features."
     }
   ]
 }
